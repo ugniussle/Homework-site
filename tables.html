@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Lentelė</title>
+<link rel="stylesheet" href="css/background.css">
+<script src="menu.js"></script>
+<script>
+    var tableCreationCount=0;
+    function genTable(){
+        if(tableCreationCount!=0){
+            remTable();
+        }
+        tableCreationCount++;
+        var row=document.getElementById('rows').value; //get values from input
+        var column=document.getElementById('columns').value;
+        var table=document.getElementById("table");
+        table.style.display='table';  
+        var usedCombo=["rgb(1,1,1)"]; //used color array, (1,1,1) should not appear naturally
+        
+        for(i=0;i<row;i++){
+            var tr=document.createElement("TR"); //create row
+            tr.setAttribute("id","td"+'x'+i);    //set row id
+            table.appendChild(tr);               //append row to table
+            for(j=0;j<column;j++){
+                var td=document.createElement("TD"); //create column
+                td.setAttribute("id","td"+'x'+i+'y'+j); //set cell id
+                tr.appendChild(td);                  //append cell to row
+                document.getElementById("td"+'x'+i+'y'+j).style.width="100px";    //set cell dimensions
+                document.getElementById("td"+'x'+i+'y'+j).style.height="100px";
+                var red=Math.floor(Math.random() * 13)*20; //cell limit is 2197
+                var green=Math.floor(Math.random() * 13)*20;
+                var blue=Math.floor(Math.random() * 13)*20;
+                var rgb="rgb("+red+","+green+","+blue+")";
+                var len=usedCombo.length;
+                for(I=0;I<len-1;I++){         //check for duplicate colors
+                    for(J=0;J<len;J++){
+                        if(rgb==usedCombo[J]){
+                            console.log("MATCH");
+                            var red=Math.floor(Math.random() * 13)*20;
+                            var green=Math.floor(Math.random() * 13)*20;
+                            var blue=Math.floor(Math.random() * 13)*20;
+                            rgb="rgb("+red+","+green+","+blue+")";
+                        }
+                    }
+                }
+                usedCombo.push(rgb);    //assign a color as used
+                document.getElementById("td"+'x'+i+'y'+j).style.backgroundColor=rgb;  //set color
+            }
+        }
+        return 0;
+    }
+
+
+    function remTable(){      //remove table (rows)
+        var row=document.getElementById('rows').value;
+        var column=document.getElementById('columns').value;
+        var table=document.getElementById("table");
+        table.style.display='none';
+        for(i=0;i<row;i++){
+            var Row=document.getElementById("td"+'x'+i);
+            if(Row==null)return 0;
+            Row.remove();
+        }
+        return 0;
+    }
+</script>
+</head>
+
+<body>
+<div class="flex-container">
+	<div class="item">
+		<a href="index.html">Pagrindinis</a>
+	</div>
+	<div class="item">
+		<a href="about.html">Apie</a>
+	</div>
+	<div class="works item" onmouseover="show()" onmouseout="hide()">
+		Darbai
+	</div>
+	<div class="item">
+		<a href="gallery.html">Galerija</a>
+	</div>
+	<div>‏‏‎ ‎</div>
+	<div>‏‏‎ ‎</div>
+	<div class="menu item" style="display:none;" onmouseover="show()" onmouseout="hide()">
+		<a href="game.html">Žaidimas</a><br>
+		<a href="tables.html">Lentelė</a><br>
+	</div>
+	<div>‏‏‎ ‎</div>
+	
+</div>
+<p style="font-size:300%;color:white">Eilutės x Stulpeliai</p><br>
+<input type="number" id='rows'><input type="number" id='columns'><button onclick="genTable()">Kurti</button><br>
+<table id="table" cellspacing="0" cellpadding="0" style="border:2px solid white;display:none;"></table>
+
+</body>
+</html>

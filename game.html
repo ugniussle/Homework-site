@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="menu.js"></script>
+<style>
+#gameTable{
+	background-image:url("img/game/play/badhabitcat.jpg");
+	/*background-size:900px 900px;*/
+}
+td{
+	background-color:black;
+}
+</style>
+<title>Pagrindinis puslapis</title>
+<link rel="stylesheet" href="css/background.css">
+</head>
+<body>
+	<div class="flex-container">
+		<div class="item">
+			<a href="index.html">Pagrindinis</a>
+		</div>
+		<div class="item">
+			<a href="about.html">Apie</a>
+		</div>
+		<div class="works item" onmouseover="show()" onmouseout="hide()">
+			Darbai
+		</div>
+		<div class="item">
+			<a href="gallery.html">Galerija</a>
+		</div>
+		<div>‏‏‎ ‎</div>
+		<div>‏‏‎ ‎</div>
+		<div class="menu item" style="display:none;" onmouseover="show()" onmouseout="hide()">
+			<a href="game.html">Žaidimas</a><br>
+			<a href="tables.html">Lentelė</a><br>
+		</div>
+		<div>‏‏‎ ‎</div>
+		
+	</div>
+
+<a onclick="changeImg('img/game/play/cat.jpg');fixImage('img/game/play/cat.jpg')">katė sienoje</a>
+<a onclick="changeImg('img/game/play/badhabitcat.jpg');fixImage('img/game/play/badhabitcat.jpg')">Katė rūko</a>
+<a onclick="changeImg('img/game/play/org.jpg');fixImage('img/game/play/org.jpg')">Kosmosas</a>
+<!--
+Žaidimas
+-->
+<script src="gameFunctions.js"></script>
+<script>
+fixImage('img/game/play/badhabitcat.jpg');
+</script>
+<table id="gameTable" cellspacing="0" cellpadding="0" style="border:1px solid white;border-spacing:1;border-collapse:collapse;background-size: cover">
+	<tr>
+		<td id="tda1" onclick="visibility('tda1','show')"></td>
+		<td id="tda2" onclick="visibility('tda2','show')"></td>
+		<td id="tda3" onclick="visibility('tda3','show')"></td>
+	</tr>
+	<tr>
+		<td id="tdb1" onclick="visibility('tdb1','show')"></td>
+		<td id="tdb2" onclick="visibility('tdb2','show')"></td>
+		<td id="tdb3" onclick="visibility('tdb3','show')"></td>
+		</td>
+	</tr>
+	<tr>
+		<td id="tdc1" onclick="visibility('tdc1','show')"></td>
+		<td id="tdc2" onclick="visibility('tdc2','show')"></td>
+		<td id="tdc3" onclick="visibility('tdc3','show')"></td>
+	</tr>
+</table>
+
+<button onclick="visibilityAll('hide')">Žaisti iš naujo</button>
+<button onclick="visibilityAll('show')">Rodyti viską</button>
+</body>
+</html>
