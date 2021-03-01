@@ -3,7 +3,7 @@
 <head>
 <title>Lentelė</title>
 <link rel="stylesheet" href="css/background.css">
-<script src="menu.js"></script>
+<script src="js/menu.js"></script>
 <script>
     var tableCreationCount=0;
     function genTable(){
@@ -14,7 +14,7 @@
         var row=document.getElementById('rows').value; //get values from input
         var column=document.getElementById('columns').value;
         var table=document.getElementById("table");
-        table.style.display='table';  
+        table.style.display='table';
         var usedCombo=["rgb(1,1,1)"]; //used color array, (1,1,1) should not appear naturally
         
         for(i=0;i<row;i++){
@@ -56,7 +56,8 @@
         var column=document.getElementById('columns').value;
         var table=document.getElementById("table");
         table.style.display='none';
-        for(i=0;i<row;i++){
+        var Row=document.getElementById("td"+'x'+1);
+        for(i=0;Row;i++){
             var Row=document.getElementById("td"+'x'+i);
             if(Row==null)return 0;
             Row.remove();
@@ -67,30 +68,32 @@
 </head>
 
 <body>
-<div class="flex-container">
-	<div class="item">
-		<a href="index.html">Pagrindinis</a>
+    <!-- menu  -->
+	<div class="flex-container">
+		<div class="item">
+			<a href="index.html">Pagrindinis</a>
+		</div>
+		<div class="item">
+			<a href="about.html">Apie</a>
+		</div>
+		<div class="works item" onmouseover="show()" onmouseout="hide()">
+			Darbai
+		</div>
+		<div class="item">
+			<a href="gallery.html">Galerija</a>
+		</div>
+		<div>‏‏‎ ‎</div>
+		<div>‏‏‎ ‎</div>
+		<div class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
+			<a href="game.html">Žaidimas</a><br>
+			<a href="tables.html">Lentelė</a><br>
+		</div>
+		<div>‏‏‎ ‎</div>
 	</div>
-	<div class="item">
-		<a href="about.html">Apie</a>
-	</div>
-	<div class="works item" onmouseover="show()" onmouseout="hide()">
-		Darbai
-	</div>
-	<div class="item">
-		<a href="gallery.html">Galerija</a>
-	</div>
-	<div>‏‏‎ ‎</div>
-	<div>‏‏‎ ‎</div>
-	<div class="menu item" style="display:none;" onmouseover="show()" onmouseout="hide()">
-		<a href="game.html">Žaidimas</a><br>
-		<a href="tables.html">Lentelė</a><br>
-	</div>
-	<div>‏‏‎ ‎</div>
-	
-</div>
+
+    <!-- table  -->
 <p style="font-size:300%;color:white">Eilutės x Stulpeliai</p><br>
-<input type="number" id='rows'><input type="number" id='columns'><button onclick="genTable()">Kurti</button><br>
+<input type="number" id='rows'><input type="number" id='columns'><button onclick="genTable()">Kurti</button>
 <table id="table" cellspacing="0" cellpadding="0" style="border:2px solid white;display:none;"></table>
 
 </body>

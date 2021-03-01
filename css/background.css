@@ -10,6 +10,7 @@ body{
 	border-color: black;
 	background-size: auto;
 	width: 250px;
+	font-size: 200%;
 
 }
 .menu:hover{
@@ -41,11 +42,7 @@ p{
 	margin-top:1px;
 	margin-bottom:1px;
 }
-/*
-.gameMenu{
 
-}
-*/
 /*    ribbon   */
 .flex-container{
 	display: flex;
@@ -67,7 +64,7 @@ p{
 	flex-basis: 100%;
 	height:0px;
 }
-.flex-container .item{
+.item{
 	background-color: #5c0707dc;
 	color: white;
 	border: 2px solid black;
