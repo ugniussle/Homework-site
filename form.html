@@ -52,46 +52,46 @@
     }
 </script>
 <style>
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
-}
-input[type=number] {
-  -moz-appearance: textfield;
-}
-input[type=text],
-input[type=number]{
-    width:200px;
-}
-input,
-select{
-    border:2px solid black;
-    padding: 5px 5px 5px 5px;
-    font-size: 75%;
-    background-color: rgb(196,196,196);
-    margin-left: 5px;
-    margin-bottom: 5px;
-    margin-top:5px;
-    border-radius: 5px;
-}
-label,h1{
-    color:lightgrey;
-    text-shadow:3px 3px 5px black;
-}
-#formid{
-    background-color: rgba(0,0,0,50%);
-    width: 350px;
-    color:white;
-    border: 2px dashed grey;
-    font-size: 200%;
-}
-.status{
-    font-size: 66%;
-}
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+    }
+    input[type=number] {
+    -moz-appearance: textfield;
+    }
+    input[type=text],
+    input[type=number]{
+        width:200px;
+    }
+    input,
+    select{
+        border:2px solid black;
+        padding: 5px 5px 5px 5px;
+        font-size: 75%;
+        background-color: rgb(196,196,196);
+        margin-left: 5px;
+        margin-bottom: 5px;
+        margin-top:5px;
+        border-radius: 5px;
+    }
+    label,h1{
+        color:lightgrey;
+        text-shadow:3px 3px 5px black;
+    }
+    #formid{
+        background-color: rgba(0,0,0,50%);
+        width: 350px;
+        color:white;
+        border: 2px dashed grey;
+        font-size: 200%;
+    }
+    .status{
+        font-size: 66%;
+    }
 </style>
 </head>
-<body>
+<body onpageshow="createMenuEl()">
 	<div class="flex-container">
 		<div class="item">
 			<a href="index.html">Pagrindinis</a>
@@ -107,10 +107,7 @@ label,h1{
 		</div>
 		<div>‏‏‎ ‎</div>
 		<div>‏‏‎ ‎</div>
-		<div class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
-			<a href="game.html">Žaidimas</a><br>
-			<a href="tables.html">Lentelė</a><br>
-            <a href="form.html">Anketa</a><br>
+		<div id="menu" class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
 		</div>
 		<div>‏‏‎ ‎</div>
 	</div>

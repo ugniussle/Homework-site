@@ -14,7 +14,7 @@ td{
 <title>Pagrindinis puslapis</title>
 <link rel="stylesheet" href="css/background.css">
 </head>
-<body>
+<body onpageshow="createMenuEl()">
 	<div class="flex-container">
 		<div class="item">
 			<a href="index.html">Pagrindinis</a>
@@ -30,10 +30,7 @@ td{
 		</div>
 		<div>‏‏‎ ‎</div>
 		<div>‏‏‎ ‎</div>
-		<div class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
-			<a href="game.html">Žaidimas</a><br>
-			<a href="tables.html">Lentelė</a><br>
-			<a href="form.html">Anketa</a><br>
+		<div id="menu" class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
 		</div>
 		<div>‏‏‎ ‎</div>
 		
