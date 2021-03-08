@@ -1,12 +1,24 @@
 <!DOCTYPE html>
+<meta charset="utf-8">
 <html>
 <head>
-<title>Pagrindinis puslapis</title>
+<title>Snake</title>
 <link rel="stylesheet" href="css/background.css">
 <script src="js/menu.js"></script>
+<script src="js/snakeGame.js"></script>
+<style>
+    #tableDiv{
+        background-color: rgb(47, 168, 53);
+        padding: 5px 5px 5px 5px;
+        width: 720px;
+        color:white;
+        border: 3px dashed black;
+        font-size: 200%;
+    }
+</style>
 </head>
 
-<body onpageshow="createMenuEl()">
+<body onpageshow="createMenuEl();createTable(60)">
 	<div class="flex-container">
 		<div class="item">
 			<a href="index.html">Pagrindinis</a>
@@ -22,12 +34,18 @@
 		</div>
 		<div>‏‏‎ ‎</div>
 		<div>‏‏‎ ‎</div>
-		<div id="menu" class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
-		</div>
+		<div id="menu" class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()"></div>
 		<div>‏‏‎ ‎</div>
 	</div>
 	<div>‏‏‎ ‎</div>
-	
-</div>
+    </div>
+    <div id="tableDiv" onmouseleave="gameEnd();document.getElementById('loseCond').innerHTML='Paskutinis žaidimas pralaimėtas dėl :'+'išejei iš langelio';"></div>
+    <div style="width:734px;background-color: rgba(50,50,50,0.5);border: 2px solid black;">
+        <center>
+            <p id="score" style="color:white;font-size: 200%;">Taškai:&nbsp</p>
+            <p id="record" style="color:white;font-size: 200%;">Paskutinio žaidimo taškai:&nbsp</p>
+            <p id="loseCond" style="color:white;font-size: 200%;">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
+        </center>
+    </div>
 </body>
 </html>
