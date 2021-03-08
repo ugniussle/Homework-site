@@ -2,7 +2,7 @@ body{
 	background-image: url("../img/background.jpg");
 	background-position-y: top;
 	background-position-x: left;
-	background-size:cover;
+	background-size:initial;
 }
 .menu{
 	background-color: rgba(64,64,64,0.2);
@@ -14,10 +14,10 @@ body{
 
 }
 .menu:hover{
-	background-color: rgba(200,200,200,0.8);
+	background-color: rgba(150,150,150,0.8);
 }
 a:link{
-	color:rgb(255, 255, 255);
+	color:lightgray;
 	text-decoration: none;
 }
 a:visited{
@@ -55,6 +55,9 @@ p{
 .flex-container > div{
 	text-align: center;
 	flex-basis: 20%;
+}
+.menu > a{
+	color:lightgray;
 }
 .works:hover{
 	color:rgb(145, 3, 3);

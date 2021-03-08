@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+<title>Anketa</title>
+<link rel="stylesheet" href="css/background.css">
+<script src="js/menu.js"></script>
+<script>
+    function submitForm(){
+        var fname=document.getElementById("fname").value;
+        var lname=document.getElementById("lname").value;
+        var height=document.getElementById("height").value;
+        var age=document.getElementById("age").value;
+        var eye=document.getElementById("eyecolor").value;
+        if(document.getElementById("imperial").checked) var unit=Math.floor(height/12)+'\''+(height-Math.floor(height/12)*12)+'ft';
+        else var unit=height+'cm';
+        var status;
+        switch(document.getElementById("learn").checked+document.getElementById("work").checked){
+            case 0:
+                status="nedirbi ir nesimokai";
+                break;
+            case 1:
+                if(document.getElementById("work").checked)status="dirbi";
+                else status="mokaisi";
+                break;
+            case 2:
+                status="dirbi ir mokaisi";
+                break;
+
+        }
+        if(checkData(fname,lname,height,age)!=0)return 1;
+        alert('Jūsų vardas: '+fname+' '+lname+'\nŪgis: '+unit+'. \nAmžius: '+age+'m.\nAkių spalva: '+eye+"\nDabartinė veikla: "+status);
+        return 0;
+    }
+    function checkData(fname,lname,height,age){
+        var returnValue=0;
+        if(fname==""){returnValue++;flash("fname")}
+        else unflash("fname");
+        if(lname==""){returnValue++;flash("lname")}
+        else unflash("lname");
+        if(height==""){returnValue++;flash("height")}
+        else unflash("height");
+        if(age==""){returnValue++;flash("age")}
+        else unflash("age");
+        return returnValue;
+    }
+    function flash(id){
+        document.getElementById(id).style="border:2px dashed red";
+    }
+    function unflash(id){
+        document.getElementById(id).style="border:2px solid black";
+    }
+</script>
+<style>
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input[type=text],
+input[type=number]{
+    width:200px;
+}
+input,
+select{
+    border:2px solid black;
+    padding: 5px 5px 5px 5px;
+    font-size: 75%;
+    background-color: rgb(196,196,196);
+    margin-left: 5px;
+    margin-bottom: 5px;
+    margin-top:5px;
+    border-radius: 5px;
+}
+label,h1{
+    color:lightgrey;
+    text-shadow:3px 3px 5px black;
+}
+#formid{
+    background-color: rgba(0,0,0,50%);
+    width: 350px;
+    color:white;
+    border: 2px dashed grey;
+    font-size: 200%;
+}
+.status{
+    font-size: 66%;
+}
+</style>
+</head>
+<body>
+	<div class="flex-container">
+		<div class="item">
+			<a href="index.html">Pagrindinis</a>
+		</div>
+		<div class="item">
+			<a href="about.html">Apie</a>
+		</div>
+		<div class="works item" onmouseover="show()" onmouseout="hide()">
+			<p style="color:lightgrey">Darbai</p>
+		</div>
+		<div class="item">
+			<a href="gallery.html">Galerija</a>
+		</div>
+		<div>‏‏‎ ‎</div>
+		<div>‏‏‎ ‎</div>
+		<div class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
+			<a href="game.html">Žaidimas</a><br>
+			<a href="tables.html">Lentelė</a><br>
+            <a href="form.html">Anketa</a><br>
+		</div>
+		<div>‏‏‎ ‎</div>
+	</div>
+	    <div>‏‏‎ ‎</div>
+    </div>
+<h1 style="color:lightgrey;font-size:200%">Suveskite savo duomenis nes kodėlgi ne.</h1>
+<div id="formid">
+    <form>
+        <label for="fname">Vardas:</label><br>
+        <input required type="text" id="fname" name="fname" placeholder="Vardenis"><br>
+        <label for="lname">Pavardė:</label><br>
+        <input required type="text" id="lname" name="lname"placeholder="Pavarenis"><br>
+        <label for="height">Ugis:</label><br>
+        <input required type="number" id="height" name="height"> 
+        <input checked required default name="unit" id="metric" type="radio"><label for="metric">cm</label>
+        <input required name="unit" id="imperial" type="radio"><label for="imperial">in</label><br>
+        <label for="age">Amžius:</label><br>
+        <input required type="number" id="age" name="age"><br>
+        <label for="eyecolor">Akių spalva:</label><br>
+        <select style="width:211px" id="eyecolor" name="eyecolor">
+            <option value="Mėlyna">Mėlyna</option>
+            <option value="Ruda">Ruda</option>
+            <option value="Žalia">Žalia</option>
+            <option value="Pilka">Pilka</option>
+        </select>
+        <label for="status1">Dabartinė veikla:</label><br>
+        <input type="checkbox" name="status1" value="Dirbu" id="work">
+        <label class="status" for="status1" >Dirbu</label><br>
+        <input type="checkbox" name="status2" value="Mokausi" id="learn">
+        <label class="status" for="status2" >Mokausi</label><br>
+        <center>
+            <input type="button" id="submit" name="submit" value="Baigti" onclick="submitForm()">
+            <input type="reset" value="Pradėti iš naujo">
+        </center>
+
+    </form>
+</div>
+
+
+</body>
+</html>
