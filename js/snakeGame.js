@@ -1,10 +1,10 @@
 function createTable(x){
-    document.getElementById("tableDiv").innerHTML+="<table onmouseleave='gameEndOnMouseLeave();' id='table' style='border-collapse:collapse;'>";
+    document.getElementById("tableDiv").innerHTML+="<table onmouseleave='gameEndOnMouseLeave();' id='table' style='border-collapse:collapse;cellpadding:1px'>";
     for (i=0;i<x;i++){
         document.getElementById("table").innerHTML+="<tr id=tr"+i+">";
         for (j=0;j<x;j++){
             document.getElementById("tr"+i).innerHTML+="<td id=x"+i+"y"+j+"></td>";
-            document.getElementById("x"+i+"y"+j).style="height:10px;width:10px;background-color:black;";
+            setBlackColor("x"+i+"y"+j);
             createOnClick(i,j)
             resetMouseOver(i,j);
         }
@@ -35,7 +35,7 @@ function move(x,y){ //snake move function
             return 0;
         };
     }
-    if(pos+1<snakeLength){ //move snake when its not full length
+    if(pos+1<snakeLength){ //move snake when is not full length
         snakePos[pos+1]='x'+x+'y'+y;
         setGreenColor(snakePos[pos+1]);
     }
@@ -50,8 +50,8 @@ function move(x,y){ //snake move function
     //else if(pos+1>snakeLength)alert("wtf"); //only for bugs
 }
 function gameEnd(){  //reset everything to fresh state
-    for(i=0;i<60;i++){
-        for(j=0;j<60;j++){
+    for(i=0;i<35;i++){
+        for(j=0;j<35;j++){
             setBlackColor('x'+i+'y'+j);
             resetMouseOver(i,j);
             createOnClick(i,j);
@@ -70,33 +70,37 @@ function gameEndOnMouseLeave(){  //set the lose condition(and end the game)
     
 }
 function genFood(){ //generate yellow square
-    var x=Math.floor(Math.random()*60);
-    var y=Math.floor(Math.random()*60);
+    var x=Math.floor(Math.random()*35);
+    var y=Math.floor(Math.random()*35);
     var coords='x'+x+'y'+y;
     for(i=0;i<snakePos.length;i++){
         if(coords==snakePos[i]){
             x++;
             y++;
-            if(x>60)x-=60;
-            if(y>60)y-=60;
+            if(x>35)x-=35;
+            if(y>35)y-=35;
             coords='x'+x+'y'+y;
         }
     }
     document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+');eatFood('+x+','+y+')');  //set eatFood function on square
-    document.getElementById("x"+x+"y"+y).style="height:10px;width:10px;background-color:yellow";  //set yellow square
+    if(snakeLength%8!=0)
+        document.getElementById("x"+x+"y"+y).style="background-color:yellow;border:0px";  //set yellow square
+    else document.getElementById("x"+x+"y"+y).style="background-color:purple;border:0px";  //set purple square
 }
 function eatFood(x,y){
     document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+')'); //unset eatFood function on square
-    snakeLength++;
+    if(snakeLength%8!=0)
+        snakeLength++;
+    else snakeLength+=3;
     genFood();
     document.getElementById("score").innerHTML="Taškai: "+(snakeLength-1);
 }
 function removeOnClick(){
-    for(i=0;i<60;i++)
-        for(j=0;j<60;j++)
+    for(i=0;i<35;i++)
+        for(j=0;j<35;j++)
             document.getElementById("x"+i+"y"+j).setAttribute("onclick",'');
 }
 function createOnClick(x,y) { document.getElementById("x"+x+"y"+y).setAttribute("onclick",'startGame('+x+','+y+')'); }
 function resetMouseOver(x,y){ document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+')'); }
-function setGreenColor(id){ document.getElementById(id).style="height:10px;width:10px;background-color:green"; }
-function setBlackColor(id){ document.getElementById(id).style="height:10px;width:10px;background-color:black"; }
+function setGreenColor(id){ document.getElementById(id).style="background-color:green;border:0px"; }
+function setBlackColor(id){ document.getElementById(id).style="height:18px;width:18px;background-color:black;border:1px dotted rgba(0,50,0,0.8);"; }

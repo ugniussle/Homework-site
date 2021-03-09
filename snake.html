@@ -12,15 +12,18 @@
     #tableDiv{
         background-color: rgb(47, 168, 53);
         padding: 5px 5px 5px 5px;
-        width: 720px;
+        width: 738px;
         color:white;
         border: 3px dashed black;
-        font-size: 200%;
+        font-size: 180%;
     }
+	td{
+		border:1px dotted rgba(0,50,0,0.8);
+	}
 </style>
 </head>
 
-<body onpageshow="createMenuEl();createTable(60)">
+<body onpageshow="createMenuEl();createTable(35)">
 	<div class="flex-container">
 		<div class="item">
 			<a href="index.html">Pagrindinis</a>
@@ -43,11 +46,11 @@
     </div>
 	<center>
     <div id="tableDiv"></div>
-    <div style="width:734px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;">
+    <div style="width:750px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;">
         <center>
-            <p id="score" style="color:white;font-size: 200%;">Taškai:&nbsp</p>
-            <p id="record" style="color:white;font-size: 200%;">Paskutinio žaidimo taškai:&nbsp</p>
-            <p id="loseCond" style="color:white;font-size: 200%;">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
+            <p id="score" style="color:white;font-size: 180%;">Taškai:&nbsp</p>
+            <p id="record" style="color:white;font-size: 180%;">Paskutinio žaidimo taškai:&nbsp</p>
+            <p id="loseCond" style="color:white;font-size: 180%;">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
         </center>
     </div>
 	</center>
