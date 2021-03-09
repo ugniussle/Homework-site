@@ -5,10 +5,9 @@
 	background-size: auto;
 	width: 250px;
 	font-size: 200%;
-    position: fixed;
-	
-    left:55%;
-    top:6%;
+	position: fixed;
+	left:55%;
+	top:6%;
 }
 .menu:hover{
 	background-color: rgba(100,100,100,1);
