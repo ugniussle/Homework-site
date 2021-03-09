@@ -6,7 +6,7 @@
 	width:fit-content;
 	font-size: 150%;
 	position: fixed;
-	left:55%;
+	left:56.5%;
 	top:6%;
 }
 .menu:hover{
@@ -58,7 +58,7 @@ p{
 }
 .item{
 	background-color: #5c0707dc;
-	/*color: white;*/
+	color: lightgray;
 	border: 2px solid black;
 	margin: 0px;
 	padding: 5px;
