@@ -42,9 +42,8 @@ function sleep(ms) {
 async function fixImage(imglink){   //fix image dimensions
 	var image=new Image();
 	image.src=imglink;
-	await sleep(20);
+	await sleep(100);
 	visibilityAll('hide');
-	await sleep(80);
 	var height=image.naturalHeight;
 	var width=image.naturalWidth;
 	if(height>=width&&height>800&&width!=0){ //make image dimensions smaller
