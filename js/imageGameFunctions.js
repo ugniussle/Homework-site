@@ -8,8 +8,6 @@ function visibility(id,action){ //change visibility of one cell
 		cell.style.backgroundColor='black';
 	}
 }
-
-
 function visibilityAll(action){ //change visibility of all cells
 	var row=["tda","tdb","tdc"];
 	var col=["1","2","3"];
@@ -20,9 +18,7 @@ function visibilityAll(action){ //change visibility of all cells
 		}
 	}
 }
-
-
-function setAllDimension(att,value){
+function setAllDimension(att,value){  //change a dimension of all cells
 	var row=["tda","tdb","tdc"];
 	var col=["1","2","3"];
 	for(i=0;i<3;i++){
@@ -46,17 +42,18 @@ function sleep(ms) {
 async function fixImage(imglink){   //fix image dimensions
 	var image=new Image();
 	image.src=imglink;
-	await sleep(100);
+	await sleep(20);
+	visibilityAll('hide');
+	await sleep(80);
 	var height=image.naturalHeight;
 	var width=image.naturalWidth;
-	
 	if(height>=width&&height>800&&width!=0){ //make image dimensions smaller
 		var ratio=height/width;
 		width=800;
 		height=width*ratio;
 		height=Math.trunc(height);
 	}
-	else if(width>800&&height!=0){
+	else if(width>800&&height!=0&&height!=0){
 		var ratio=width/height;
 		height=800;
 		width=height*ratio;
@@ -74,7 +71,6 @@ async function fixImage(imglink){   //fix image dimensions
 	table.style.height=height;
 	setAllDimension("height",(height/3));
 	setAllDimension("width",(width/3));
-	visibilityAll('hide');
 }
 function changeImg(link){  //change image
 	var set="url("+link+")";

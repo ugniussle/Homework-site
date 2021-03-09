@@ -4,11 +4,25 @@
 <script src="js/menu.js"></script>
 <style>
 #gameTable{
-	background-image:url("img/game/play/badhabitcat.jpg");
+	background-image:url("img/game/play/cat.jpg");
 	/*background-size:900px 900px;*/
 }
 td{
 	background-color:black;
+}
+.hideImages{
+	border:black solid 2px;
+	position:fixed;
+	top:20%;
+	right:10%;
+	background-color: grey;
+	color:grey;
+	width:250px;
+	font-size: 200%;
+}
+.hideImages:hover{
+	border:grey solid 2px;
+	background-color: black;
 }
 </style>
 <title>Pagrindinis puslapis</title>
@@ -36,16 +50,18 @@ td{
 		<div>‏‏‎ ‎</div>
 		
 	</div>
-
-<a onclick="changeImg('img/game/play/cat.jpg');fixImage('img/game/play/cat.jpg')">katė sienoje</a>
-<a onclick="changeImg('img/game/play/badhabitcat.jpg');fixImage('img/game/play/badhabitcat.jpg')">Katė rūko</a>
-<a onclick="changeImg('img/game/play/org.jpg');fixImage('img/game/play/org.jpg')">Kosmosas</a>
+<div class='hideImages'>
+	<p style='font-size: 75%;'>Pasirinkti nuotrauką:</p>
+	<a onclick="fixImage('img/game/play/cat.jpg');changeImg('img/game/play/cat.jpg');">Nuotrauka 1</a><br>
+	<a onclick="fixImage('img/game/play/badhabitcat.jpg');changeImg('img/game/play/badhabitcat.jpg');">Nuotrauka 2</a><br>
+	<a onclick="fixImage('img/game/play/org.jpg');changeImg('img/game/play/org.jpg');">Nuotrauka 3</a>
+</div>
 <!--
 Žaidimas
 -->
 <script src="js/imageGameFunctions.js"></script>
 <script>
-fixImage('img/game/play/badhabitcat.jpg');
+fixImage('img/game/play/cat.jpg');
 </script>
 <table id="gameTable" cellspacing="0" cellpadding="0" style="border:1px solid white;border-spacing:1;border-collapse:collapse;background-size: cover">
 	<tr>
