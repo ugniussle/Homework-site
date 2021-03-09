@@ -74,12 +74,14 @@ function genFood(){ //generate yellow square
     var y=Math.floor(Math.random()*35);
     var coords='x'+x+'y'+y;
     for(i=0;i<snakePos.length;i++){
-        if(coords==snakePos[i]){
-            x++;
-            y++;
-            if(x>35)x-=35;
-            if(y>35)y-=35;
-            coords='x'+x+'y'+y;
+        for(j=snakePos.length;j>i;j--){
+            if(coords==snakePos[i]){
+                x++;
+                y++;
+                if(x>35)x-=35;
+                if(y>35)y-=35;
+                coords='x'+x+'y'+y;
+            }
         }
     }
     document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+');eatFood('+x+','+y+')');  //set eatFood function on square
