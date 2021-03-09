@@ -14,6 +14,14 @@
         tableCreationCount++;
         var row=document.getElementById('rows').value; //get values from input
         var column=document.getElementById('columns').value;
+        if(column>38){
+            alert("Perdaug stulpelių,max 38");
+            return 1;
+        }
+        if(row>15){
+            alert("Perdaug eilučių,max 15");
+            return 1;
+        }
         var table=document.getElementById("table");
         table.style.display='table';
         var usedCombo=["rgb(1,1,1)"]; //used color array, (1,1,1) should not appear naturally
@@ -26,11 +34,11 @@
                 var td=document.createElement("TD"); //create column
                 td.setAttribute("id","td"+'x'+i+'y'+j); //set cell id
                 tr.appendChild(td);                  //append cell to row
-                document.getElementById("td"+'x'+i+'y'+j).style.width="100px";    //set cell dimensions
-                document.getElementById("td"+'x'+i+'y'+j).style.height="100px";
-                var red=Math.floor(Math.random() * 13)*20; //cell limit is 2197
-                var green=Math.floor(Math.random() * 13)*20;
-                var blue=Math.floor(Math.random() * 13)*20;
+                document.getElementById("td"+'x'+i+'y'+j).style.width="50px";    //set cell dimensions
+                document.getElementById("td"+'x'+i+'y'+j).style.height="50px";
+                var red=Math.floor(Math.random() * 20)*12; //cell limit is 256^3
+                var green=Math.floor(Math.random() * 20)*12;
+                var blue=Math.floor(Math.random() * 20)*12;
                 var rgb="rgb("+red+","+green+","+blue+")";
                 var len=usedCombo.length;
                 for(I=0;I<len-1;I++){         //check for duplicate colors
@@ -92,7 +100,7 @@
 
     <!-- table  -->
 <p style="font-size:300%;color:white">Eilutės x Stulpeliai</p><br>
-<input type="number" id='rows'><input type="number" id='columns'><button onclick="genTable()">Kurti</button>
+<input type="number" id='rows' max=15><input type="number" id='columns' max=38><button onclick="genTable()">Kurti</button>
 <table id="table" cellspacing="0" cellpadding="0" style="border:2px solid white;display:none;"></table>
 
 </body>
