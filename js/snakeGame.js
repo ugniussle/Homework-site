@@ -1,5 +1,5 @@
 function createTable(x){
-    document.getElementById("tableDiv").innerHTML+="<table id=table style='border-collapse:collapse;border: 2px solid black;'>";
+    document.getElementById("tableDiv").innerHTML+="<table onmouseleave='gameEndOnMouseLeave();' id='table' style='border-collapse:collapse;border: 2px solid black;'>";
     for (i=0;i<x;i++){
         document.getElementById("table").innerHTML+="<tr id=tr"+i+">";
         for (j=0;j<x;j++){
@@ -31,7 +31,7 @@ function move(x,y){ //snake move function
     for(i=0;i<snakeLength;i++){ //check for collision
         if(snakePos[i]==('x'+x+'y'+y)&&pos!=0){
             gameEnd();
-            document.getElementById("loseCond").innerHTML="Paskutinis žaidimas pralaimėtas dėl :"+"suvalgei save";
+            document.getElementById("loseCond").innerHTML="Paskutinis žaidimas pralaimėtas dėl: "+"suvalgei save";
             return 0;
         };
     }
@@ -50,7 +50,6 @@ function move(x,y){ //snake move function
     //else if(pos+1>snakeLength)alert("wtf"); //only for bugs
 }
 function gameEnd(){  //reset everything to fresh state
-    
     for(i=0;i<60;i++){
         for(j=0;j<60;j++){
             setBlackColor('x'+i+'y'+j);
@@ -62,6 +61,13 @@ function gameEnd(){  //reset everything to fresh state
         document.getElementById("record").innerHTML="Paskutinio žaidimo taškai: "+(snakeLength-1);
     snakePos=[];
     snakeLength=0;
+}
+function gameEndOnMouseLeave(){  //set the lose condition(and end the game)
+    if(snakeLength!=0){
+        document.getElementById('loseCond').innerHTML='Paskutinis žaidimas pralaimėtas dėl: '+'išėjei iš langelio';
+    }
+    gameEnd();
+    
 }
 function genFood(){ //generate yellow square
     var x=Math.floor(Math.random()*60);
@@ -85,23 +91,12 @@ function eatFood(x,y){
     genFood();
     document.getElementById("score").innerHTML="Taškai: "+(snakeLength-1);
 }
-
-
-
 function removeOnClick(){
     for(i=0;i<60;i++)
         for(j=0;j<60;j++)
             document.getElementById("x"+i+"y"+j).setAttribute("onclick",'');
 }
-function createOnClick(x,y){
-    document.getElementById("x"+x+"y"+y).setAttribute("onclick",'startGame('+x+','+y+')');
-}
-function resetMouseOver(x,y){
-    document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+')');
-}
-function setGreenColor(id){
-    document.getElementById(id).style="height:10px;width:10px;background-color:green";
-}
-function setBlackColor(id){
-    document.getElementById(id).style="height:10px;width:10px;background-color:black";
-}
+function createOnClick(x,y) { document.getElementById("x"+x+"y"+y).setAttribute("onclick",'startGame('+x+','+y+')'); }
+function resetMouseOver(x,y){ document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+')'); }
+function setGreenColor(id){ document.getElementById(id).style="height:10px;width:10px;background-color:green"; }
+function setBlackColor(id){ document.getElementById(id).style="height:10px;width:10px;background-color:black"; }
