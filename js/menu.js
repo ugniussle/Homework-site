@@ -6,7 +6,7 @@ function hide(){
 }
 function createMenuEl(){
 	var links=["imageGame.html","tables.html","form.html","snake.html"];
-	var names=["Nuotraukos žaidimas","Spalvotas table","Anketa","🐍Snake žaidimas"];
+	var names=["Nuotraukos žaidimas","Spalvotas table","Anketa","🐍Gyvatės žaidimas"];
 	var insert="";
 	for(i=0;i<links.length;i++){
 		insert+="<a href=\""+links[i]+"\">"+names[i]+"</a><br>";
