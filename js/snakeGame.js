@@ -1,5 +1,5 @@
 function createTable(x){
-    document.getElementById("tableDiv").innerHTML+="<table onmouseleave='gameEndOnMouseLeave();' id='table' style='border-collapse:collapse;border: 2px solid black;'>";
+    document.getElementById("tableDiv").innerHTML+="<table onmouseleave='gameEndOnMouseLeave();' id='table' style='border-collapse:collapse;'>";
     for (i=0;i<x;i++){
         document.getElementById("table").innerHTML+="<tr id=tr"+i+">";
         for (j=0;j<x;j++){

@@ -3,8 +3,8 @@
 	border:1px solid;
 	border-color: black;
 	background-size: auto;
-	width: 250px;
-	font-size: 200%;
+	width:fit-content;
+	font-size: 150%;
 	position: fixed;
 	left:55%;
 	top:6%;
