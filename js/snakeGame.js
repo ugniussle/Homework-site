@@ -1,8 +1,10 @@
+var dim;
 function createTable(x){
+    dim=x;
     document.getElementById("tableDiv").innerHTML+="<table onmouseleave='gameEndOnMouseLeave();' id='table' style='border-collapse:collapse;cellpadding:0px'>";
-    for (i=0;i<x;i++){
+    for (i=0;i<dim;i++){
         document.getElementById("table").innerHTML+="<tr id=tr"+i+">";
-        for (j=0;j<x;j++){
+        for (j=0;j<dim;j++){
             document.getElementById("tr"+i).innerHTML+="<td id=x"+i+"y"+j+"></td>";
             setBlackColor("x"+i+"y"+j);
             createOnClick(i,j)
@@ -11,6 +13,10 @@ function createTable(x){
         document.getElementById("table").innerHTML+="</tr>";
     }
     document.getElementById("tableDiv").innerHTML+="</table>";
+    return 0;
+}
+function delTable(){
+    document.getElementById("tableDiv").innerHTML="";
 }
 var snakeLength=0;
 var snakePos=[];
@@ -29,7 +35,7 @@ function move(x,y){ //snake move function
     for(i=0;i<snakeLength;i++){ //check for collision
         if(snakePos[i]==('x'+x+'y'+y)&&pos!=0){
             gameEnd();
-            document.getElementById("loseCond").innerHTML="Paskutinis žaidimas pralaimėtas dėl: "+"suvalgei save";
+            document.getElementById("loseCond").innerHTML="Paskutinis žaidimas pralaimėtas dėl: suvalgei save";
             return 0;
         };
     }
@@ -48,8 +54,8 @@ function move(x,y){ //snake move function
     //else if(pos+1>snakeLength)alert("wtf"); //only for bugs
 }
 function gameEnd(){  //reset everything to a fresh state
-    for(i=0;i<35;i++){
-        for(j=0;j<35;j++){
+    for(i=0;i<dim;i++){
+        for(j=0;j<dim;j++){
             setBlackColor('x'+i+'y'+j);
             resetMouseOver(i,j);
             createOnClick(i,j);
@@ -61,46 +67,66 @@ function gameEnd(){  //reset everything to a fresh state
     snakeLength=0;
 }
 function gameEndOnMouseLeave(){  //set the lose condition(and end the game)
-    if(snakeLength!=0){
-        document.getElementById('loseCond').innerHTML='Paskutinis žaidimas pralaimėtas dėl: '+'išėjei iš lango';
-    }
+    if(snakeLength!=0) document.getElementById('loseCond').innerHTML='Paskutinis žaidimas pralaimėtas dėl: išėjei iš lango';
+    else return 1;
     gameEnd();
-    
 }
-function genFood(){ //generate yellow square
-    var x=Math.floor(Math.random()*35);
-    var y=Math.floor(Math.random()*35);
-    var coords='x'+x+'y'+y;
-    for(i=0;i<snakePos.length;i++){
-        for(j=snakePos.length;j>i;j--){
-            if(coords==snakePos[i]){
-                x++;
-                y++;
-                if(x>35)x-=35;
-                if(y>35)y-=35;
-                coords='x'+x+'y'+y;
-            }
+function gameEndWin(){
+    document.getElementById('loseCond').innerHTML='Paskutinis žaidimas laimėtas!!!';
+    document.getElementById('loseCond').style.color="red";
+    gameEnd();
+}
+function genFood(){ //generate food square
+    var coords;
+    var check=1;
+    while(check){
+        var x=Math.floor(Math.random()*dim);
+        var y=Math.floor(Math.random()*dim);
+        coords='x'+x+'y'+y;
+        var count=0;
+        for(i=0;i<snakePos.length;i++){
+            if(snakePos[i]!=coords)count++;
         }
+        if(count==snakePos.length)check=0;
     }
-    document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+');eatFood('+x+','+y+')');  //set eatFood function on square
+    document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'eatFood('+x+','+y+');move('+x+','+y+')');  //set eatFood function on square
     if(snakeLength%8!=0)
-        document.getElementById("x"+x+"y"+y).style="background-color:yellow;border:1px solid black";  //set yellow square
-    else document.getElementById("x"+x+"y"+y).style="background-color:purple;border:1px solid black";  //set purple square
+        document.getElementById("x"+x+"y"+y).style="height:"+630/dim+"px;width:"+630/dim+"px;background-color:yellow;border:1px solid black";  //set yellow square
+    else document.getElementById("x"+x+"y"+y).style="height:"+630/dim+"px;width:"+630/dim+"px;background-color:purple;border:1px solid black";  //set purple square
 }
 function eatFood(x,y){
-    document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+')'); //unset eatFood function on square
+    resetMouseOver(x,y); //unset eatFood function on square
+    var purpleValue=document.getElementById("purpleValue").value;
+    purpleValue=parseInt(purpleValue,10);
     if(snakeLength%8!=0)
         snakeLength++;
-    else snakeLength+=3;
+    else if (snakeLength%8==0&&purpleValue>0&&purpleValue<=10) snakeLength+=purpleValue;
+    else {
+        document.getElementById('loseCond').innerHTML='Paskutinis žaidimas pralaimėtas dėl: hax';
+        gameEnd();
+        return 1;
+    }
+    if(snakeLength>=dim*dim){
+        gameEndWin();
+        return 0;
+    }
     genFood();
     document.getElementById("score").innerHTML="Taškai: "+(snakeLength-1);
+    document.getElementById("score").style.color='rgb('+(Math.random*256)+','+(Math.random*256)+','+(Math.random*256)+')';
 }
 function removeOnClick(){
-    for(i=0;i<35;i++)
-        for(j=0;j<35;j++)
+    for(i=0;i<dim;i++)
+        for(j=0;j<dim;j++)
             document.getElementById("x"+i+"y"+j).setAttribute("onclick",'');
 }
 function createOnClick(x,y) { document.getElementById("x"+x+"y"+y).setAttribute("onclick",'startGame('+x+','+y+')'); }
 function resetMouseOver(x,y){ document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+')'); }
-function setGreenColor(id){ document.getElementById(id).style="background-color:green;border:1px solid black"; }
-function setBlackColor(id){ document.getElementById(id).style="height:18px;width:18px;background-color:black;border:1px solid rgba(0,50,0,0.4);"; }
+function setGreenColor(id){ document.getElementById(id).style="height:"+630/dim+"px;width:"+630/dim+"px;background-color:green;border:1px solid black"; }
+function setBlackColor(id){ document.getElementById(id).style="height:"+630/dim+"px;width:"+630/dim+"px;background-color:black;border:1px solid rgba(0,50,0,0.4);"; }
+
+//settings
+
+function changeSize(){
+    delTable();
+    createTable(document.getElementById("size").value);
+}

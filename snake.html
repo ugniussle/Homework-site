@@ -12,13 +12,18 @@
     #tableDiv{
         background-color: rgb(47, 168, 53);
         padding: 5px 5px 5px 5px;
-        width: 738px;
+		width: max-content;
+        max-width: 800px;
         color:white;
         border: 3px dashed black;
         font-size: 180%;
     }
 	td{
 		border:1px double rgba(0,50,0,0.8);
+	}
+	.gameInfo{
+		color:white;
+		font-size: 180%;
 	}
 </style>
 </head>
@@ -48,9 +53,16 @@
     <div id="tableDiv"></div>
     <div style="width:750px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;">
         <center>
-            <p id="score" style="color:white;font-size: 180%;">Taškai:&nbsp</p>
-            <p id="record" style="color:white;font-size: 180%;">Paskutinio žaidimo taškai:&nbsp</p>
-            <p id="loseCond" style="color:white;font-size: 180%;">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
+            <p class="gameInfo" id="score">Taškai:&nbsp</p>
+            <p class="gameInfo" id="record">Paskutinio žaidimo taškai:&nbsp</p>
+            <p class="gameInfo" id="loseCond">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
+        </center>
+    </div>
+	<div style="width:750px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;">
+        <center>
+            <p class="gameInfo">Nustatymai:</p>
+			<p class="gameInfo" style="font-size: 100%;">Langelių kiekis(x*x)<input id="size" value=35 type="number" min=5 max=50 size=2><input onclick="changeSize()" value="Nustatyti" type="button"></p>
+			<p class="gameInfo" style="font-size: 100%;">Violetinio langelio vertė<input type="number" id="purpleValue" value=3 min=1 max=10 size=2></p>
         </center>
     </div>
 	</center>
