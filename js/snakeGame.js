@@ -92,8 +92,8 @@ function genFood(){ //generate food square
     }
     document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'eatFood('+x+','+y+');move('+x+','+y+')');  //set eatFood function on square
     if(snakeLength%8!=0)
-        document.getElementById("x"+x+"y"+y).style="height:"+630/dim+"px;width:"+630/dim+"px;background-color:yellow;border:1px solid black";  //set yellow square
-    else document.getElementById("x"+x+"y"+y).style="height:"+630/dim+"px;width:"+630/dim+"px;background-color:purple;border:1px solid black";  //set purple square
+        document.getElementById("x"+x+"y"+y).style="height:"+(window.innerHeight-450)/dim+"px;width:"+(window.innerHeight-450)/dim+"px;background-color:yellow;border:1px solid black";  //set yellow square
+    else document.getElementById("x"+x+"y"+y).style="height:"+(window.innerHeight-450)/dim+"px;width:"+(window.innerHeight-450)/dim+"px;background-color:purple;border:1px solid black";  //set purple square
 }
 function eatFood(x,y){
     resetMouseOver(x,y); //unset eatFood function on square
@@ -122,8 +122,8 @@ function removeOnClick(){
 }
 function createOnClick(x,y) { document.getElementById("x"+x+"y"+y).setAttribute("onclick",'startGame('+x+','+y+')'); }
 function resetMouseOver(x,y){ document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'move('+x+','+y+')'); }
-function setGreenColor(id){ document.getElementById(id).style="height:"+630/dim+"px;width:"+630/dim+"px;background-color:green;border:1px solid black"; }
-function setBlackColor(id){ document.getElementById(id).style="height:"+630/dim+"px;width:"+630/dim+"px;background-color:black;border:1px solid rgba(0,50,0,0.4);"; }
+function setGreenColor(id){ document.getElementById(id).style="height:"+(window.innerHeight-450)/dim+"px;width:"+(window.innerHeight-450)/dim+"px;background-color:green;border:1px solid black"; }
+function setBlackColor(id){ document.getElementById(id).style="height:"+(window.innerHeight-450)/dim+"px;width:"+(window.innerHeight-450)/dim+"px;background-color:black;border:1px solid rgba(0,50,0,0.4);"; }
 
 //settings
 
