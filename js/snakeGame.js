@@ -86,6 +86,7 @@ function genFood(){ //generate food square
         var count=0;
         for(i=0;i<snakePos.length;i++){
             if(snakePos[i]!=coords)count++;
+            else break;
         }
         if(count==snakePos.length)check=0;
     }
