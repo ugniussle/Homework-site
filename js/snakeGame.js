@@ -1,6 +1,7 @@
 var dim;
 function createTable(x){
     dim=x;
+    if(dim<5||dim>50)return 1;
     document.getElementById("tableDiv").innerHTML+="<table onmouseleave='gameEndOnMouseLeave();' id='table' style='border-collapse:collapse;cellpadding:0px'>";
     for (i=0;i<dim;i++){
         document.getElementById("table").innerHTML+="<tr id=tr"+i+">";
@@ -29,9 +30,7 @@ function startGame(x,y){  //start the game
 }
 function move(x,y){ //snake move function
     pos=snakePos.length-1;
-    if(snakeLength==0){ // dont do anything if game is not started
-        return 1;
-    }
+    if(snakeLength==0)return 1;
     for(i=0;i<snakeLength;i++){ //check for collision
         if(snakePos[i]==('x'+x+'y'+y)&&pos!=0){
             gameEnd();
@@ -45,13 +44,10 @@ function move(x,y){ //snake move function
     }
     else if(pos+1==snakeLength){ //move snake when it is full length
         setBlackColor(snakePos[0]);
-        for(i=0;i<pos;i++){
-            snakePos[i]=snakePos[i+1];
-        }
+        for(i=0;i<pos;i++) snakePos[i]=snakePos[i+1];  // shift array to left
         snakePos[pos]='x'+x+'y'+y;
         setGreenColor(snakePos[pos]);
     }
-    //else if(pos+1>snakeLength)alert("wtf"); //only for bugs
 }
 function gameEnd(){  //reset everything to a fresh state
     for(i=0;i<dim;i++){
