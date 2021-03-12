@@ -75,7 +75,7 @@ function gameEndWin(){
 function genFood(){ //generate food square
     var coords;
     var check=1;
-    while(check){
+    while(check){  //dont generate food on the snake
         var x=Math.floor(Math.random()*dim);
         var y=Math.floor(Math.random()*dim);
         coords='x'+x+'y'+y;
@@ -84,7 +84,7 @@ function genFood(){ //generate food square
             if(snakePos[i]!=coords)count++;
             else break;
         }
-        if(count==snakePos.length)check=0;
+        if(count==snakePos.length)break;
     }
     document.getElementById("x"+x+"y"+y).setAttribute("onmouseover",'eatFood('+x+','+y+');move('+x+','+y+')');  //set eatFood function on square
     if(snakeLength%8!=0)
