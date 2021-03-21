@@ -30,9 +30,17 @@ function startGame(x,y){
     else genFood();
 }
 var time;  //timeout object
+var clockObj; //clock below game window object
 function timer(){
     var id=genFood();
     time=setTimeout(unsetFood,parseInt(document.getElementById("timeValue").value)*1000,id);
+    clock(parseInt(document.getElementById("timeValue").value*1000));
+}
+function clock(ms){
+    if(ms<0)clearTimeout(Clock);
+    document.getElementById("clock").innerHTML="Maistas pradings už: "+ms/1000+"s";
+    clockObj=setTimeout(clock,100,ms-100);
+    
 }
 function unsetFood(id){
     resetMouseOver(getXFromId(id),getYFromId(id));
@@ -105,6 +113,8 @@ function gameEnd(){  //reset everything to a fresh state
             resetMouseOver(i,j);
             createOnClick(i,j);
             if(document.getElementById("timeCheck").checked)clearTimeout(time);
+            clearTimeout(clockObj);
+            document.getElementById("clock").innerHTML="";
         }
     }
     if(snakeLength!=0)
@@ -150,6 +160,7 @@ function genFood(){ //generate food square
     return coords;
 }
 function eatFood(x,y){
+    clearTimeout(clockObj);
     resetMouseOver(x,y); //unset eatFood function on square
     var purpleValue=parseInt(document.getElementById("purpleValue").value,10);
     if(snakeLength%(8+Math.floor(purpleValue/2))!=0)
