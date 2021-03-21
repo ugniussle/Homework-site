@@ -58,12 +58,8 @@ function move(x,y){ //snake move function
     document.getElementById(snakePos[0]).style.transform.value=document.getElementById(snakePos[1]).style.transform.value;
 }
 function getRotation(pos){
-    var x1=getYFromId(snakePos[pos]);
-    var y1=getXFromId(snakePos[pos]);
-    var x2=getYFromId(snakePos[pos-1]);
-    var y2=getXFromId(snakePos[pos-1]);  // x and y switched because x is rows and y is columns
-    var xDiff=x1-x2;
-    var yDiff=y2-y1;
+    var xDiff=getYFromId(snakePos[pos])-getYFromId(snakePos[pos-1]);
+    var yDiff=getXFromId(snakePos[pos-1])-getXFromId(snakePos[pos]); // x and y switched because x is rows and y is columns
     switch(xDiff){
         case -1:
             switch(yDiff){
@@ -133,24 +129,21 @@ function genFood(){ //generate food square
     var squareDim=(window.innerHeight-350)/dim;
     var x=getXFromId(coords);
     var y=getYFromId(coords);
+    var purpleValue=parseInt(document.getElementById("purpleValue").value,10);
     document.getElementById(coords).setAttribute("onmouseenter",';move('+x+','+y+');eatFood('+x+','+y+')');  //set eatFood function on square
-    document.getElementById(coords).style.height=squareDim;
-    document.getElementById(coords).style.width=squareDim;
-    document.getElementById(coords).style.backgroundRepeat='no-repeat';
     document.getElementById(coords).style.backgroundSize=squareDim+'px '+squareDim+'px';
-    if(snakeLength%8!=0)    //set banana
+    if(snakeLength%(8+Math.floor(purpleValue/2))!=0)    //set banana
         document.getElementById(coords).style.backgroundImage="url('img/snake/snakebanana.png')";
-    else                    //set powder
+    else                                                //set powder
         document.getElementById(coords).style.backgroundImage="url('img/snake/snakepowder.png')";
 }
 function eatFood(x,y){
     resetMouseOver(x,y); //unset eatFood function on square
-    var purpleValue=document.getElementById("purpleValue").value;
-    purpleValue=parseInt(purpleValue,10);
-    if(snakeLength%(5+Math.floor(purpleValue/2))!=0)
+    var purpleValue=parseInt(document.getElementById("purpleValue").value,10);
+    if(snakeLength%(8+Math.floor(purpleValue/2))!=0)
         snakeLength++;
-    else if (snakeLength%(5+Math.floor(purpleValue/2))==0&&purpleValue>0&&purpleValue<=10) snakeLength+=purpleValue;
-    else {
+    else snakeLength+=purpleValue;
+    if(purpleValue<0||purpleValue>10){
         document.getElementById('loseCond').innerHTML='Paskutinis žaidimas pralaimėtas dėl: hax';
         gameEnd();
         return 1;
@@ -169,12 +162,9 @@ function removeOnClick(){
 }
 function createOnClick(x,y) { document.getElementById("x"+x+"y"+y).setAttribute("onclick",'startGame('+x+','+y+')'); }  //add the start game function
 function resetMouseOver(x,y){ document.getElementById("x"+x+"y"+y).setAttribute("onmouseenter",'move('+x+','+y+')'); }   //reset move function on tile
-function setSnakeHead(id){ 
+function setSnakeHead(id){
     var squareDim=(window.innerHeight-350)/dim;
-    document.getElementById(id).style.height=squareDim;
-    document.getElementById(id).style.width=squareDim;
     document.getElementById(id).style.backgroundImage="url('img/snake/snakehead.png')";
-    document.getElementById(id).style.backgroundRepeat='no-repeat';
     document.getElementById(id).style.backgroundSize=squareDim+'px '+squareDim+'px';
 }
 function setSnakeBody(id){ document.getElementById(id).style.backgroundImage="url('img/snake/snakebase.png')"; }
@@ -184,10 +174,7 @@ function setBlackColor(id){
 }
 function getXFromId(id){return parseInt(id.substring(id.indexOf('x')+1,id.indexOf('y')),10); }
 function getYFromId(id){return parseInt(id.substring(id.indexOf('y')+1,id.length),10); } 
-
-
 //settings
-
 function changeSize(){
     delTable();
     createTable(document.getElementById("size").value);

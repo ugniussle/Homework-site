@@ -21,15 +21,20 @@
 	td{
 		/*border:1px double rgba(0,50,0,0.8);*/
 		padding: 0px 0px 0px 0px;
+		background-repeat: no-repeat;
 	}
 	.gameInfo{
 		color:white;
 		font-size: 180%;
 	}
+	.gameSettings{
+		font-size: 100%;
+		color:white;
+	}
 </style>
 </head>
 
-<body onpageshow="createMenuEl();createTable(18)">
+<body onpageshow="createMenuEl();createTable(18);">
 	<div class="flex-container">
 		<div class="item">
 			<a href="index.html">Pagrindinis</a>
@@ -51,22 +56,22 @@
 	<div>‏‏‎ ‎</div>
     </div>
 	<center>
-    <div id="tableDiv"></div>
-    <div style="width:max-content;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;">
-        <center>
-            <p class="gameInfo" id="score">Taškai:&nbsp0</p>
-            <p class="gameInfo" id="record">Paskutinio žaidimo taškai:&nbsp</p>
-            <p class="gameInfo" id="loseCond">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
-        </center>
-    </div>
-	<div style="width:300px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;max-height: 80px;">
-        <center>
-            <p class="gameInfo">Nustatymai:</p>
-			<p class="gameInfo" style="font-size: 100%;">Langelių kiekis(x*x): <input id="size" value=18 type="number" min=5 max=50 size=2>
-			<input onclick="changeSize()" style="padding:0px;width: 60px;border-radius: 7px;" value="Nustatyti" type="button"></p>
-			<p class="gameInfo" style="font-size: 100%;">Tablečių vertė: <input type="number" id="purpleValue" value=3 min=1 max=10 size=2></p>
-        </center>
-    </div>
+		<div id="tableDiv"></div>
+		<div style="width:max-content;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;">
+			<center>
+				<p class="gameInfo" id="score">Taškai:&nbsp0</p>
+				<p class="gameInfo" id="record">Paskutinio žaidimo taškai:&nbsp</p>
+				<p class="gameInfo" id="loseCond">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
+			</center>
+		</div>
+		<div style="width:300px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;max-height: 80px;">
+			<center>
+				<p class="gameSettings" style="font-size: 25px;">Nustatymai:</p>
+				<p class="gameSettings">Langelių kiekis(x*x): <input id="size" value=18 type="number" min=5 max=50 size=2 style="padding:0px;border-radius: 3px;">
+				<input onclick="changeSize()" style="padding:0px;width: 60px;border-radius: 7px;" value="Nustatyti" type="button"></p>
+				<p class="gameSettings">Tablečių vertė: <input type="number" id="purpleValue" value=3 min=1 max=10 size=2 style="padding:0px;border-radius: 3px;"></p>
+			</center>
+		</div>
 	</center>
 </body>
 </html>
