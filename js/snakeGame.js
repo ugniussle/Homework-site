@@ -71,18 +71,24 @@ function getRotation(pos){
                 case -1: return 180;
                 case 0: return -90;
                 case 1: return 0;
+                default: return 0;
             }
         case 0:
             switch(yDiff){
                 case -1: return 180;
                 case 1: return 0;
+                default: return 0;
             }
         case 1:
             switch(yDiff){
                 case -1: return 180;
                 case 0: return 90;
                 case 1: return 0;
+                default: return 0;
             }
+        default:
+            if(xDiff>1)return 90;
+            else return -90;
     }
 }
 function rotate(rot,id){
