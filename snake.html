@@ -9,14 +9,14 @@
 <script src="js/menu.js"></script>
 <script src="js/snakeGame.js"></script>
 <style>
-    #tableDiv{
-        background-color: rgb(47, 168, 53);
-        padding: 5px 5px 5px 5px;
+	#tableDiv{
+		background-color: black;
+		padding: 5px 5px 5px 5px;
 		width: max-content;
-        max-width: 2000px;
-        color:white;
-        border: 3px dashed black;
-        font-size: 180%;
+		max-width: 2000px;
+		color:white;
+		border: 4px dashed rgb(47, 168, 53);
+		font-size: 180%;
     }
 	td{
 		/*border:1px double rgba(0,50,0,0.8);*/
@@ -30,6 +30,9 @@
 	.gameSettings{
 		font-size: 100%;
 		color:white;
+	}
+	input[type=checkbox]{
+		margin: 0px 0px 0px 0px;
 	}
 </style>
 </head>
@@ -60,12 +63,13 @@
 				<p class="gameInfo" id="loseCond">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
 			</center>
 		</div>
-		<div style="width:300px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;max-height: 80px;">
+		<div style="width:400px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;max-height: 80px;">
 			<center>
 				<p class="gameSettings" style="font-size: 25px;">Nustatymai:</p>
 				<p class="gameSettings">Langelių kiekis(x*x): <input id="size" value=18 type="number" min=5 max=50 size=2 style="padding:0px;border-radius: 3px;">
 				<input onclick="changeSize()" style="padding:0px;width: 60px;border-radius: 7px;" value="Nustatyti" type="button"></p>
 				<p class="gameSettings">Tablečių vertė: <input type="number" id="purpleValue" value=3 min=1 max=10 size=2 style="padding:0px;border-radius: 3px;"></p>
+				<p class="gameSettings">Laikmatis: <input type="checkbox" id="timeCheck" unchecked> Sekundės paimti maistelį <input type="number" id="timeValue" value=2 min=1 max=20 size=2 style="padding:0px;border-radius: 3px;"></p>
 			</center>
 		</div>
 	</center>
