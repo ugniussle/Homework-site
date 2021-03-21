@@ -29,7 +29,7 @@
 </style>
 </head>
 
-<body onpageshow="createMenuEl();createTable(11)">
+<body onpageshow="createMenuEl();createTable(18)">
 	<div class="flex-container">
 		<div class="item">
 			<a href="index.html">Pagrindinis</a>
@@ -59,10 +59,11 @@
             <p class="gameInfo" id="loseCond">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
         </center>
     </div>
-	<div style="width:max-content;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;max-height: 80px;">
+	<div style="width:300px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;max-height: 80px;">
         <center>
             <p class="gameInfo">Nustatymai:</p>
-			<p class="gameInfo" style="font-size: 100%;">Langelių kiekis(x*x): <input id="size" value=11 type="number" min=5 max=50 size=2><input onclick="changeSize()" value="Nustatyti" type="button"></p>
+			<p class="gameInfo" style="font-size: 100%;">Langelių kiekis(x*x): <input id="size" value=11 type="number" min=5 max=50 size=2>
+			<input onclick="changeSize()" style="padding:0px;width: 60px;border-radius: 7px;" value="Nustatyti" type="button"></p>
 			<p class="gameInfo" style="font-size: 100%;">Tablečių vertė: <input type="number" id="purpleValue" value=3 min=1 max=10 size=2></p>
         </center>
     </div>

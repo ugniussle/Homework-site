@@ -64,7 +64,6 @@ function getRotation(pos){
     var y2=getXFromId(snakePos[pos-1]);  // x and y switched because x is rows and y is columns
     var xDiff=x1-x2;
     var yDiff=y2-y1;
-    console.log(xDiff+' '+yDiff);
     switch(xDiff){
         case -1:
             switch(yDiff){
@@ -121,8 +120,7 @@ function gameEndWin(){
 }
 function genFood(){ //generate food square
     var coords;
-    var check=1;
-    while(check){  //dont generate food on the snake
+    while(true){  //dont generate food on the snake
         coords='x'+Math.floor(Math.random()*dim)+'y'+Math.floor(Math.random()*dim);
         var count=0;
         for(i=0;i<snakePos.length;i++){
@@ -132,7 +130,7 @@ function genFood(){ //generate food square
         if(count==snakePos.length)break;
     }
     console.log(coords);
-    var squareDim=(window.innerHeight-450)/dim;
+    var squareDim=(window.innerHeight-350)/dim;
     var x=getXFromId(coords);
     var y=getYFromId(coords);
     document.getElementById(coords).setAttribute("onmouseenter",';move('+x+','+y+');eatFood('+x+','+y+')');  //set eatFood function on square
@@ -142,7 +140,7 @@ function genFood(){ //generate food square
     document.getElementById(coords).style.backgroundSize=squareDim+'px '+squareDim+'px';
     if(snakeLength%8!=0)    //set banana
         document.getElementById(coords).style.backgroundImage="url('img/snake/snakebanana.png')";
-    else                   //set powder
+    else                    //set powder
         document.getElementById(coords).style.backgroundImage="url('img/snake/snakepowder.png')";
 }
 function eatFood(x,y){
@@ -172,7 +170,7 @@ function removeOnClick(){
 function createOnClick(x,y) { document.getElementById("x"+x+"y"+y).setAttribute("onclick",'startGame('+x+','+y+')'); }  //add the start game function
 function resetMouseOver(x,y){ document.getElementById("x"+x+"y"+y).setAttribute("onmouseenter",'move('+x+','+y+')'); }   //reset move function on tile
 function setSnakeHead(id){ 
-    var squareDim=(window.innerHeight-450)/dim;
+    var squareDim=(window.innerHeight-350)/dim;
     document.getElementById(id).style.height=squareDim;
     document.getElementById(id).style.width=squareDim;
     document.getElementById(id).style.backgroundImage="url('img/snake/snakehead.png')";
@@ -182,7 +180,7 @@ function setSnakeHead(id){
 function setSnakeBody(id){ document.getElementById(id).style.backgroundImage="url('img/snake/snakebase.png')"; }
 function setSnakeTail(id){ document.getElementById(id).style.backgroundImage="url('img/snake/snaketail.png')"; }
 function setBlackColor(id){
-    document.getElementById(id).style="height:"+(window.innerHeight-450)/dim+"px;width:"+(window.innerHeight-450)/dim+"px;background-color:black;border:0px solid rgba(0,50,0,0.4);cellpadding:0px";
+    document.getElementById(id).style="height:"+(window.innerHeight-350)/dim+"px;width:"+(window.innerHeight-350)/dim+"px;background-color:black;border:0px solid rgba(0,50,0,0.4);cellpadding:0px";
 }
 function getXFromId(id){return parseInt(id.substring(id.indexOf('x')+1,id.indexOf('y')),10); }
 function getYFromId(id){return parseInt(id.substring(id.indexOf('y')+1,id.length),10); } 
