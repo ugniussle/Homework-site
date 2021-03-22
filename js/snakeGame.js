@@ -26,8 +26,12 @@ function startGame(x,y){
     snakeLength=3;
     snakePos[0]='x'+x+'y'+y;
     move(x,y);
+    if(document.getElementById("wallCheck").checked)
+        for(let i=0;i<parseInt(document.getElementById("wallValue").value);i++)
+            genWall();
     if(document.getElementById("timeCheck").checked)timer();  //start timer mode
     else genFood();
+
 }
 
 function move(x,y){ //snake move function
@@ -118,17 +122,7 @@ function gameEndWin(){
     gameEnd();
 }
 function genFood(){ //generate food square
-    var coords;
-    while(true){  //dont generate food on the snake
-        coords='x'+Math.floor(Math.random()*dim)+'y'+Math.floor(Math.random()*dim);
-        let count=0;
-        for(let i=0;i<snakePos.length;i++){
-            if(snakePos[i]!=coords)count++;
-            else break;
-        }
-        if(count==snakePos.length)break;
-    }
-    
+    var coords=getRandomId();
     var purpleValue=parseInt(document.getElementById("purpleValue").value,10);
     var x=getXFromId(coords);
     var y=getYFromId(coords);
@@ -141,6 +135,21 @@ function genFood(){ //generate food square
         document.getElementById(coords).style.backgroundImage="url('img/snake/snakepowder.png')";
     console.log(coords);
     return coords;
+}
+function genWall(){
+    var coords=getRandomId();
+    var x=getXFromId(coords);
+    var y=getYFromId(coords);
+    document.getElementById(coords).setAttribute("onmouseenter",';move('+x+','+y+');hitWall()');  //set hitWall function on square
+    var squareDim=(window.innerHeight-350)/dim;
+    document.getElementById(coords).style.backgroundSize=squareDim+'px '+squareDim+'px';
+    document.getElementById(coords).style.backgroundImage="url('img/snake/snakewall.png')";
+
+}
+function hitWall(){
+    document.getElementById("loseCond").innerHTML='Paskutinis žaidimas pralaimėtas dėl: įpuolei į sieną'
+    gameEnd();
+
 }
 function eatFood(x,y){
     clearTimeout(clockObj);
@@ -184,6 +193,18 @@ function setBlackColor(id){
 }
 function getXFromId(id){return parseInt(id.substring(id.indexOf('x')+1,id.indexOf('y')),10); }
 function getYFromId(id){return parseInt(id.substring(id.indexOf('y')+1,id.length),10); } 
+function getRandomId(){ //get random id (not on the snake)
+    var id;
+    while(true){  //dont generate food on the snake
+        id='x'+Math.floor(Math.random()*dim)+'y'+Math.floor(Math.random()*dim);
+        let count=0;
+        for(let i=0;i<snakePos.length;i++){
+            if(snakePos[i]!=id)count++;
+            else break;
+        }
+        if(count==snakePos.length)return id;
+    }
+}
 //settings
 function changeSize(){
     delTable();
