@@ -70,7 +70,7 @@ function startGame(){
             genWall();
     else document.getElementById("wallValue").value=0;
     if(document.getElementById("timeCheck").checked)timer();  //start timer mode
-    else genFood();
+    else if(document.getElementsByClassName('food').length==0)genFood();
     
 }
 function moveLoop(){
@@ -211,7 +211,7 @@ function eatFood(){
         clearTimeout(time);
         timer();
     }
-    else genFood();
+    else if(document.getElementsByClassName('food').length==0) genFood();
     document.getElementById("score").innerHTML="Taškai: "+(snakeLength-3);
 }
 function setSnakeHead(id){
