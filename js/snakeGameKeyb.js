@@ -104,7 +104,6 @@ function move(x,y){ //snake move function
         gameEnd();
         return 0;
     }
-    //if(document.getElementsByClassName('food').length==0) genFood();
     
     pos=snakePos.length-1;
     if(snakeLength==0||'x'+x+'y'+y==snakePos[pos])return 1;
