@@ -66,15 +66,16 @@ function startGame(){
     snakePos[0]='x'+Math.floor(dim/2)+'y'+Math.floor(dim/2);
     snakePos[1]='x'+Math.floor(dim/2)+'y'+(Math.floor(dim/2)-1);
     snakePos[2]='x'+Math.floor(dim/2)+'y'+(Math.floor(dim/2)-2);
-    //if(document.getElementById("wallCheck").checked)
-    //    for(let i=0;i<parseInt(document.getElementById("wallValue").value);i++)
-     //       genWall();
-    //else document.getElementById("wallValue").value=0;
-    //if(document.getElementById("timeCheck").checked)timer();  //start timer mode
-    if(document.getElementsByClassName('food').length==0)genFood();
+    if(document.getElementById("wallCheck").checked)
+        for(let i=0;i<parseInt(document.getElementById("wallValue").value);i++)
+            genWall();
+    else document.getElementById("wallValue").value=0;
+    if(document.getElementById("timeCheck").checked)timer();  //start timer mode
+    else if(document.getElementsByClassName('food').length==0)genFood();
     
 }
 function moveLoop(){
+    if(snakeLength==0)return 0;
     var x=getXFromId(snakePos[snakePos.length-1]);
     var y=getYFromId(snakePos[snakePos.length-1]);
     switch(getRotation(snakePos.length-1)){
@@ -95,10 +96,16 @@ function moveLoop(){
             //break;
     }
     move(x,y);
+    clearTimeout(moveLoopObj);
     moveLoopObj=setTimeout(moveLoop,snakeSpeed);
 }
 function move(x,y){ //snake move function
-    if(x>(dim-1)||y>(dim-1)||x<0||y<0)gameEnd();
+    if(x>(dim-1)||y>(dim-1)||x<0||y<0){
+        gameEnd();
+        return 0;
+    }
+    //if(document.getElementsByClassName('food').length==0) genFood();
+    
     pos=snakePos.length-1;
     if(snakeLength==0||'x'+x+'y'+y==snakePos[pos])return 1;
     if(document.getElementById('x'+x+'y'+y).className=='food'){
@@ -194,7 +201,7 @@ function hitWall(){
     gameEnd();
 }
 function eatFood(){
-    clearTimeout(clockObj);
+    //clearTimeout(clockObj);
     var purpleValue=parseInt(document.getElementById("purpleValue").value,10);
     if(snakeLength%(8+Math.floor(purpleValue/2))!=0)
         snakeLength++;
@@ -204,14 +211,10 @@ function eatFood(){
         gameEnd();
         return 1;
     }
-    if(snakeLength/*+parseInt(document.getElementById("wallValue").value,10)*/>=dim*dim){
+    if(snakeLength+parseInt(document.getElementById("wallValue").value,10)>=dim*dim){
         gameEndWin();
         return 0;
     }
-    //if(document.getElementById("timeCheck").checked){
-    //    clearTimeout(time);
-    //    timer();
-    //}
     if(document.getElementsByClassName('food').length==0) genFood();
     document.getElementById("score").innerHTML="Taškai: "+(snakeLength-3);
 }
@@ -243,12 +246,13 @@ function getRandomId(){ //get random id (not on the snake)
 function gameEnd(){  //reset everything to a fresh state
     console.log('gameEnd');
     clearTimeout(moveLoopObj);
-    //clearTimeout(clockObj);
+    clearTimeout(clockObj);
     for(let i=0;i<dim;i++){
         for(let j=0;j<dim;j++){
             setBlackColor('x'+i+'y'+j);
-            //if(document.getElementById("timeCheck").checked)clearTimeout(time);
-            //document.getElementById("clock").innerHTML="";
+            if(document.getElementById("timeCheck").checked)clearTimeout(time);
+            document.getElementById("clock").innerHTML="";
+            document.getElementById('x'+i+'y'+j).className="";
         }
     }
     if(snakeLength!=0)
@@ -266,14 +270,14 @@ var time;  //timeout object (for timed food)
 var clockObj; //clock object
 function timer(){
     var id=genFood();
-    time=setTimeout(unsetFood,parseInt(document.getElementById("timeValue").value)*1000,id);
+    //time=setTimeout(unsetFood,parseInt(document.getElementById("timeValue").value)*1000,id);
     clock(parseInt(document.getElementById("timeValue").value*1000,10));
 }
-function clock(ms){
-    if(ms<0)clearTimeout(Clock);
-    document.getElementById("clock").innerHTML="Maistas pradings už: "+ms/1000+"s";
-    clockObj=setTimeout(clock,100,ms-100);
-}
+//function clock(ms){
+//    if(ms<0)clearTimeout(Clock);
+//   document.getElementById("clock").innerHTML="Maistas pradings už: "+ms/1000+"s";
+//    clockObj=setTimeout(clock,100,ms-100);
+//}
 function unsetFood(id){
     //resetMouseOver(getXFromId(id),getYFromId(id));
     setBlackColor(id);
