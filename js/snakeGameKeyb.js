@@ -93,9 +93,6 @@ function moveLoop(){
         case 180:
             x++;
             break;
-        //default:
-            //y--;
-            //break;
     }
     move(x,y);
     moveLoopObj=setTimeout(moveLoop,snakeSpeed);
@@ -183,15 +180,6 @@ function genFood(){ //generate food square
         document.getElementById(coords).style.backgroundImage="url('img/snake/snakepowder.png')";
     return coords;
 }
-/*function genWall(){  //generate obstacle
-    var coords=getRandomId();
-    var x=getXFromId(coords);
-    var y=getYFromId(coords);
-    document.getElementById(coords).setAttribute("onmouseenter",';move('+x+','+y+');hitWall()');  //set hitWall function on square
-    var squareDim=(window.innerHeight-350)/dim;
-    document.getElementById(coords).style.backgroundSize=squareDim+'px '+squareDim+'px';
-    document.getElementById(coords).style.backgroundImage="url('img/snake/snakewall.png')";
-}*/
 function hitWall(){
     document.getElementById("loseCond").innerHTML='Paskutinis žaidimas pralaimėtas dėl: įpuolei į sieną'
     gameEnd();
