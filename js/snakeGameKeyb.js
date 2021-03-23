@@ -61,20 +61,17 @@ window.addEventListener("keydown",function(event){
 function startGame(){
     console.log('startgame');
     snakeSpeed=parseInt(document.getElementById("snakeSpeed").value,10);
-    if(snakeSpeed>1000||snakeSpeed<100){
-        gameEnd();
-        return 0;
-    }
+    if(snakeSpeed>1000||snakeSpeed<100){gameEnd();}
     snakeLength=3;
     snakePos[0]='x'+Math.floor(dim/2)+'y'+Math.floor(dim/2);
     snakePos[1]='x'+Math.floor(dim/2)+'y'+(Math.floor(dim/2)-1);
     snakePos[2]='x'+Math.floor(dim/2)+'y'+(Math.floor(dim/2)-2);
-    if(document.getElementById("wallCheck").checked)
-        for(let i=0;i<parseInt(document.getElementById("wallValue").value);i++)
-            genWall();
-    else document.getElementById("wallValue").value=0;
-    if(document.getElementById("timeCheck").checked)timer();  //start timer mode
-    else if(document.getElementsByClassName('food').length==0)genFood();
+    //if(document.getElementById("wallCheck").checked)
+    //    for(let i=0;i<parseInt(document.getElementById("wallValue").value);i++)
+     //       genWall();
+    //else document.getElementById("wallValue").value=0;
+    //if(document.getElementById("timeCheck").checked)timer();  //start timer mode
+    if(document.getElementsByClassName('food').length==0)genFood();
     
 }
 function moveLoop(){
@@ -93,6 +90,9 @@ function moveLoop(){
         case 180:
             x++;
             break;
+        //default:
+            //y--;
+            //break;
     }
     move(x,y);
     moveLoopObj=setTimeout(moveLoop,snakeSpeed);
@@ -180,6 +180,15 @@ function genFood(){ //generate food square
         document.getElementById(coords).style.backgroundImage="url('img/snake/snakepowder.png')";
     return coords;
 }
+/*function genWall(){  //generate obstacle
+    var coords=getRandomId();
+    var x=getXFromId(coords);
+    var y=getYFromId(coords);
+    document.getElementById(coords).setAttribute("onmouseenter",';move('+x+','+y+');hitWall()');  //set hitWall function on square
+    var squareDim=(window.innerHeight-350)/dim;
+    document.getElementById(coords).style.backgroundSize=squareDim+'px '+squareDim+'px';
+    document.getElementById(coords).style.backgroundImage="url('img/snake/snakewall.png')";
+}*/
 function hitWall(){
     document.getElementById("loseCond").innerHTML='Paskutinis žaidimas pralaimėtas dėl: įpuolei į sieną'
     gameEnd();
@@ -195,15 +204,15 @@ function eatFood(){
         gameEnd();
         return 1;
     }
-    if(snakeLength+parseInt(document.getElementById("wallValue").value,10)>=dim*dim){
+    if(snakeLength/*+parseInt(document.getElementById("wallValue").value,10)*/>=dim*dim){
         gameEndWin();
         return 0;
     }
-    if(document.getElementById("timeCheck").checked){
-        clearTimeout(time);
-        timer();
-    }
-    else if(document.getElementsByClassName('food').length==0) genFood();
+    //if(document.getElementById("timeCheck").checked){
+    //    clearTimeout(time);
+    //    timer();
+    //}
+    if(document.getElementsByClassName('food').length==0) genFood();
     document.getElementById("score").innerHTML="Taškai: "+(snakeLength-3);
 }
 function setSnakeHead(id){
@@ -234,12 +243,12 @@ function getRandomId(){ //get random id (not on the snake)
 function gameEnd(){  //reset everything to a fresh state
     console.log('gameEnd');
     clearTimeout(moveLoopObj);
-    clearTimeout(clockObj);
+    //clearTimeout(clockObj);
     for(let i=0;i<dim;i++){
         for(let j=0;j<dim;j++){
             setBlackColor('x'+i+'y'+j);
-            if(document.getElementById("timeCheck").checked)clearTimeout(time);
-            document.getElementById("clock").innerHTML="";
+            //if(document.getElementById("timeCheck").checked)clearTimeout(time);
+            //document.getElementById("clock").innerHTML="";
         }
     }
     if(snakeLength!=0)
