@@ -61,6 +61,10 @@ window.addEventListener("keydown",function(event){
 function startGame(){
     console.log('startgame');
     snakeSpeed=parseInt(document.getElementById("snakeSpeed").value,10);
+    if(snakeSpeed>1000||snakeSpeed<100){
+        gameEnd();
+        return 0;
+    }
     snakeLength=3;
     snakePos[0]='x'+Math.floor(dim/2)+'y'+Math.floor(dim/2);
     snakePos[1]='x'+Math.floor(dim/2)+'y'+(Math.floor(dim/2)-1);
