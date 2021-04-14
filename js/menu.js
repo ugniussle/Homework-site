@@ -1,15 +1,9 @@
-function show(){
-	document.getElementsByClassName('menu')[0].style.display='block';
-}
-function hide(){
-	document.getElementsByClassName('menu')[0].style.display='none';
-}
 function createMenuEl(){
-	var links=["imageGame.html","tables.html","form.html","snake.html","snakeKeyb.html"];
-	var names=["Nuotraukos žaidimas","Spalvotas table","Anketa","🐍Gyvatės žaidimas","🐍Gyvatė (klaviatūra)"];
+	var links=["imageGame.html","tables.html","form.html","snake.html","snakeKeyb.html","bootstrapTest.html"];
+	var names=["Nuotraukos žaidimas","Spalvotas table","Anketa","🐍Gyvatės žaidimas","🐍Gyvatė (klaviatūra)","Bootstrap Testas"];
 	var insert="";
 	for(i=0;i<links.length;i++){
 		insert+="<a href=\""+links[i]+"\">"+names[i]+"</a><br>";
 	}
-	document.getElementById("menu").innerHTML=insert;
+	document.getElementsByClassName("dropdown-content")[0].innerHTML=insert;
 }

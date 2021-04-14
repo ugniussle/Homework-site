@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="css/background.css">
 <link rel="stylesheet" href="css/menu.css">
 <script src="js/menu.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script>
     function submitForm(){
         var fname=document.getElementById("fname").value;
@@ -93,60 +97,65 @@
 </style>
 </head>
 <body onpageshow="createMenuEl()">
-	<div class="flex-container">
-		<div class="item">
-			<a href="index.html">Pagrindinis</a>
-		</div>
-		<div class="item">
-			<a href="about.html">Apie</a>
-		</div>
-		<div class="works item" onmouseover="show()" onmouseout="hide()">
-			<p style="color:lightgrey">Darbai</p>
-		</div>
-		<div class="item">
-			<a href="gallery.html">Galerija</a>
-		</div>
-		<div>‏‏‎ ‎</div>
-		<div>‏‏‎ ‎</div>
-		<div id="menu" class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
-		</div>
-		<div>‏‏‎ ‎</div>
-	</div>
-	    <div>‏‏‎ ‎</div>
+	<div class="container-fluid">
+        <div class="row">
+            <div class="item col-lg-3">
+                <center>
+                    <a href="index.html">Pagrindinis</a>
+                </center>
+            </div>
+            <div class="item col-lg-3">
+                <center>
+                    <a href="about.html">Apie</a>
+                </center>
+            </div>
+            <div class="dropdown item col-lg-3">
+                <div class="dropd-button">
+                    <center>
+                        <p style="color:lightgrey">Darbai</p>
+                    </center>
+                </div>
+                <div class="dropdown-content"></div>
+            </div>
+            <div class="item col-lg-3">
+                <center>
+                    <a href="gallery.html">Galerija</a>
+                </center>
+            </div>
+        </div>
+        <h1 style="color:lightgrey;font-size:200%">Suveskite savo duomenis nes kodėlgi ne.</h1>
+        <div id="formid">
+        <form>
+            <label for="fname">Vardas:</label><br>
+            <input required type="text" id="fname" name="fname" placeholder="Vardenis"><br>
+            <label for="lname">Pavardė:</label><br>
+            <input required type="text" id="lname" name="lname"placeholder="Pavarenis"><br>
+            <label for="height">Ugis:</label><br>
+            <input required type="number" id="height" name="height"> 
+            <input checked required default name="unit" id="metric" type="radio"><label for="metric">cm</label>
+            <input required name="unit" id="imperial" type="radio"><label for="imperial">in</label><br>
+            <label for="age">Amžius:</label><br>
+            <input required type="number" id="age" name="age"><br>
+            <label for="eyecolor">Akių spalva:</label><br>
+            <select style="width:211px" id="eyecolor" name="eyecolor">
+                <option value="Mėlyna">Mėlyna</option>
+                <option value="Ruda">Ruda</option>
+                <option value="Žalia">Žalia</option>
+                <option value="Pilka">Pilka</option>
+            </select>
+            <label for="status1">Dabartinė veikla:</label><br>
+            <input type="checkbox" name="status1" value="Dirbu" id="work">
+            <label class="status" for="status1" >Dirbu</label><br>
+            <input type="checkbox" name="status2" value="Mokausi" id="learn">
+            <label class="status" for="status2" >Mokausi</label><br>
+            <center>
+                <input type="button" id="submit" name="submit" value="Baigti" onclick="submitForm()">
+                <input type="reset" value="Pradėti iš naujo">
+            </center>
+
+        </form>
     </div>
-<h1 style="color:lightgrey;font-size:200%">Suveskite savo duomenis nes kodėlgi ne.</h1>
-<div id="formid">
-    <form>
-        <label for="fname">Vardas:</label><br>
-        <input required type="text" id="fname" name="fname" placeholder="Vardenis"><br>
-        <label for="lname">Pavardė:</label><br>
-        <input required type="text" id="lname" name="lname"placeholder="Pavarenis"><br>
-        <label for="height">Ugis:</label><br>
-        <input required type="number" id="height" name="height"> 
-        <input checked required default name="unit" id="metric" type="radio"><label for="metric">cm</label>
-        <input required name="unit" id="imperial" type="radio"><label for="imperial">in</label><br>
-        <label for="age">Amžius:</label><br>
-        <input required type="number" id="age" name="age"><br>
-        <label for="eyecolor">Akių spalva:</label><br>
-        <select style="width:211px" id="eyecolor" name="eyecolor">
-            <option value="Mėlyna">Mėlyna</option>
-            <option value="Ruda">Ruda</option>
-            <option value="Žalia">Žalia</option>
-            <option value="Pilka">Pilka</option>
-        </select>
-        <label for="status1">Dabartinė veikla:</label><br>
-        <input type="checkbox" name="status1" value="Dirbu" id="work">
-        <label class="status" for="status1" >Dirbu</label><br>
-        <input type="checkbox" name="status2" value="Mokausi" id="learn">
-        <label class="status" for="status2" >Mokausi</label><br>
-        <center>
-            <input type="button" id="submit" name="submit" value="Baigti" onclick="submitForm()">
-            <input type="reset" value="Pradėti iš naujo">
-        </center>
-
-    </form>
-</div>
-
+    </div>
 
 </body>
 </html>

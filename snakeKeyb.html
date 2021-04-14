@@ -8,6 +8,10 @@
 <link rel="stylesheet" href="css/menu.css">
 <script src="js/menu.js"></script>
 <script src="js/snakeGameKeyb.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <style>
 	#tableDiv{
 		background-color: black;
@@ -28,7 +32,7 @@
 	}
 	.gameInfo{
 		color:white;
-		font-size: 180%;
+		font-size: 160%;
 	}
 	.gameSettings{
 		font-size: 100%;
@@ -37,51 +41,66 @@
 	input[type=checkbox]{
 		margin: 0px 0px 0px 0px;
 	}
+	p{
+		margin:0px;
+	}
 </style>
 </head>
 
 <body onpageshow="createMenuEl();createTable(18);">
-	<div class="flex-container">
-		<div class="item">
-			<a href="index.html">Pagrindinis</a>
-		</div>
-		<div class="item">
-			<a href="about.html">Apie</a>
-		</div>
-		<div class="works item" onmouseover="show()" onmouseout="hide()">
-			<p style="color:lightgrey">Darbai</p>
-		</div>
-		<div class="item">
-			<a href="gallery.html">Galerija</a>
-		</div>
-		<div id="menu" class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()"></div>
+	<div class="container-fluid">
+        <div class="row">
+            <div class="item col-lg-3">
+                <center>
+                    <a href="index.html">Pagrindinis</a>
+                </center>
+            </div>
+            <div class="item col-lg-3">
+                <center>
+                    <a href="about.html">Apie</a>
+                </center>
+            </div>
+            <div class="dropdown item col-lg-3">
+                <div class="dropd-button">
+                    <center>
+                        <p style="color:lightgrey">Darbai</p>
+                    </center>
+                </div>
+                <div class="dropdown-content"></div>
+            </div>
+            <div class="item col-lg-3">
+                <center>
+                    <a href="gallery.html">Galerija</a>
+                </center>
+            </div>
+        </div>
+		<br>
+		<center>
+			<div style="width:max-content;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;">
+				<p class="gameInfo">Spauskite "enter" mygtuką kad pradėti žaidimą.</p>
+			</div>
+			<div id="tableDiv"></div>
+			<div style="width:max-content;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;">
+				<center>
+					<p class="gameInfo" id="clock"></p>
+					<p class="gameInfo" id="score">Taškai:&nbsp0</p>
+					<p class="gameInfo" id="record">Paskutinio žaidimo taškai:&nbsp</p>
+					<p class="gameInfo" id="loseCond" style="margin:0 5px 0 5px">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
+				</center>
+			</div>
+			<div style="width:400px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;max-height: 80px;">
+				<center>
+					<p class="gameSettings" style="font-size: 25px;">Nustatymai:</p>
+					<p class="gameSettings">Langelių kiekis(x*x): <input id="size" value=18 type="number" min=5 max=50 size=2 style="padding:0px;border-radius: 3px;">
+					<input onclick="changeSize()" style="padding:0px;width: 60px;border-radius: 7px;" value="Nustatyti" type="button"></p>
+					<p  class="gameSettings">Tablečių vertė: <input type="number" id="purpleValue" value=3 min=1 max=10 size=2 style="padding:0px;border-radius: 3px;"></p>
+					<p style='visibility: collapse;height: 0px;' class="gameSettings">Laikmatis: <input type="checkbox" id="timeCheck" unchecked> Sekundės paimti maistelį <input type="number" id="timeValue" value=2 min=1 max=10 size=2 style="padding:0px;border-radius: 3px;"></p>
+					<p style='visibility:collapse;height: 0px;' class="gameSettings">Kliūtys: <input type="checkbox" id="wallCheck" unchecked> Kliūčių skaičius <input type="number" id="wallValue" value=0 min=0 max=10 size=2 style="padding:0px;border-radius: 3px;"></p>
+					<p class="gameSettings">Gyvatės greitis (ms): <input type="number" step=100 id="snakeSpeed" value=500 min=100 max=1000 size=4 style="padding:0px;border-radius: 3px;"></p>
+					
+				</center>
+			</div>
+		</center>
 	</div>
-	<br>
-	<center>
-        <div style="width:max-content;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;">
-			<p class="gameInfo">Spauskite "enter" mygtuką kad pradėti žaidimą.</p>
-		</div>
-		<div id="tableDiv"></div>
-		<div style="width:max-content;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;">
-			<center>
-				<p class="gameInfo" id="clock"></p>
-				<p class="gameInfo" id="score">Taškai:&nbsp0</p>
-				<p class="gameInfo" id="record">Paskutinio žaidimo taškai:&nbsp</p>
-				<p class="gameInfo" id="loseCond" style="margin:0 5px 0 5px">Paskutinis žaidimas pralaimėtas dėl :&nbsp</p>
-			</center>
-		</div>
-		<div style="width:400px;background-color: rgba(50,50,50,0.9);border: 2px solid black;border-radius: 5px;overflow-y: auto;max-height: 80px;">
-			<center>
-				<p class="gameSettings" style="font-size: 25px;">Nustatymai:</p>
-				<p class="gameSettings">Langelių kiekis(x*x): <input id="size" value=18 type="number" min=5 max=50 size=2 style="padding:0px;border-radius: 3px;">
-				<input onclick="changeSize()" style="padding:0px;width: 60px;border-radius: 7px;" value="Nustatyti" type="button"></p>
-				<p  class="gameSettings">Tablečių vertė: <input type="number" id="purpleValue" value=3 min=1 max=10 size=2 style="padding:0px;border-radius: 3px;"></p>
-				<p style='visibility: collapse;height: 0px;' class="gameSettings">Laikmatis: <input type="checkbox" id="timeCheck" unchecked> Sekundės paimti maistelį <input type="number" id="timeValue" value=2 min=1 max=10 size=2 style="padding:0px;border-radius: 3px;"></p>
-				<p style='visibility:collapse;height: 0px;' class="gameSettings">Kliūtys: <input type="checkbox" id="wallCheck" unchecked> Kliūčių skaičius <input type="number" id="wallValue" value=0 min=0 max=10 size=2 style="padding:0px;border-radius: 3px;"></p>
-				<p class="gameSettings">Gyvatės greitis (ms): <input type="number" step=100 id="snakeSpeed" value=500 min=100 max=1000 size=4 style="padding:0px;border-radius: 3px;"></p>
-				
-			</center>
-		</div>
-	</center>
 </body>
 </html>

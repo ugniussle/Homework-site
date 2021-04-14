@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
 <script src="js/menu.js"></script>
 <title>Apie</title>
 <link rel="stylesheet" href="css/background.css">
 <link rel="stylesheet" href="css/menu.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 </head>
 <body onpageshow="createMenuEl()">
-    <div class="flex-container">
-		<div class="item">
-			<a href="index.html">Pagrindinis</a>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="item col-lg-3">
+                <center>
+                    <a href="index.html">Pagrindinis</a>
+                </center>
+            </div>
+            <div class="item col-lg-3">
+                <center>
+                    <a href="about.html">Apie</a>
+                </center>
+            </div>
+            <div class="dropdown item col-lg-3">
+                <div class="dropd-button">
+                    <center>
+                        <p style="color:lightgrey">Darbai</p>
+                    </center>
+                </div>
+                <div class="dropdown-content"></div>
+            </div>
+            <div class="item col-lg-3">
+                <center>
+                    <a href="gallery.html">Galerija</a>
+                </center>
+            </div>
 		</div>
-		<div class="item">
-			<a href="about.html">Apie</a>
-		</div>
-		<div class="works item" onmouseover="show()" onmouseout="hide()">
-			<p style="color:lightgrey">Darbai</p>
-		</div>
-		<div class="item">
-			<a href="gallery.html">Galerija</a>
-		</div>
-		<div>‏‏‎ ‎</div>
-		<div>‏‏‎ ‎</div>
-		<div id="menu" class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
-		</div>
-		<div>‏‏‎ ‎</div>
+		<h1 style="color:lightgray">Apie</h1>
+		<br>
+		<p style="font-size: 150%;color:lightgray">Šis puslapis sukurtas parodyti namų darbus.</p>
+		<br>
+		<img style="border:black solid 1px" src="img/tree2.jpg" height="500" alt="tree">
 	</div>
-<h1>Apie</h1>
-
-<p style="font-size: 300%">Šis puslapis sukurtas parodyti namų darbus.</p>
-<br>
-<img style="border:black solid 1px" src="img/tree2.jpg" height="500" alt="tree">
 </body>
 </html>

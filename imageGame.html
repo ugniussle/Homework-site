@@ -2,6 +2,10 @@
 <html>
 <head>
 <script src="js/menu.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <style>
 #gameTable{
 	background-image:url("img/game/play/cat.jpg");
@@ -30,59 +34,67 @@ td{
 <link rel="stylesheet" href="css/menu.css">
 </head>
 <body onpageshow="createMenuEl()">
-	<div class="flex-container">
-		<div class="item">
-			<a href="index.html">Pagrindinis</a>
+	<div class="container-fluid">
+        <div class="row">
+            <div class="item col-lg-3">
+                <center>
+                    <a href="index.html">Pagrindinis</a>
+                </center>
+            </div>
+            <div class="item col-lg-3">
+                <center>
+                    <a href="about.html">Apie</a>
+                </center>
+            </div>
+            <div class="dropdown item col-lg-3">
+                <div class="dropd-button">
+                    <center>
+                        <p style="color:lightgrey">Darbai</p>
+                    </center>
+                </div>
+                <div class="dropdown-content"></div>
+            </div>
+            <div class="item col-lg-3">
+                <center>
+                    <a href="gallery.html">Galerija</a>
+                </center>
+            </div>
+        </div>
+    
+		<div class='hideImages'>
+			<p style='font-size: 75%;'>Pasirinkti nuotrauką:</p>
+			<a onclick="fixImage('img/game/play/cat.jpg');changeImg('img/game/play/cat.jpg');">Nuotrauka 1</a><br>
+			<a onclick="fixImage('img/game/play/badhabitcat.jpg');changeImg('img/game/play/badhabitcat.jpg');">Nuotrauka 2</a><br>
+			<a onclick="fixImage('img/game/play/org.jpg');changeImg('img/game/play/org.jpg');">Nuotrauka 3</a>
 		</div>
-		<div class="item">
-			<a href="about.html">Apie</a>
-		</div>
-		<div class="works item" onmouseover="show()" onmouseout="hide()">
-			<p style="color:lightgrey">Darbai</p>
-		</div>
-		<div class="item">
-			<a href="gallery.html">Galerija</a>
-		</div>
-		<div>‏‏‎ ‎</div>
-		<div>‏‏‎ ‎</div>
-		<div id="menu" class="menu" style="display:none;" onmouseover="show()" onmouseout="hide()">
-		</div>
-		<div>‏‏‎ ‎</div>
-		
-	</div>
-<div class='hideImages'>
-	<p style='font-size: 75%;'>Pasirinkti nuotrauką:</p>
-	<a onclick="fixImage('img/game/play/cat.jpg');changeImg('img/game/play/cat.jpg');">Nuotrauka 1</a><br>
-	<a onclick="fixImage('img/game/play/badhabitcat.jpg');changeImg('img/game/play/badhabitcat.jpg');">Nuotrauka 2</a><br>
-	<a onclick="fixImage('img/game/play/org.jpg');changeImg('img/game/play/org.jpg');">Nuotrauka 3</a>
-</div>
-<!--
-Žaidimas
--->
-<script src="js/imageGameFunctions.js"></script>
-<script>
-fixImage('img/game/play/cat.jpg');
-</script>
-<table id="gameTable" cellspacing="0" cellpadding="0" style="border:1px solid white;border-spacing:1;border-collapse:collapse;background-size: cover">
-	<tr>
-		<td id="tda1" onclick="visibility('tda1','show')"></td>
-		<td id="tda2" onclick="visibility('tda2','show')"></td>
-		<td id="tda3" onclick="visibility('tda3','show')"></td>
-	</tr>
-	<tr>
-		<td id="tdb1" onclick="visibility('tdb1','show')"></td>
-		<td id="tdb2" onclick="visibility('tdb2','show')"></td>
-		<td id="tdb3" onclick="visibility('tdb3','show')"></td>
-		</td>
-	</tr>
-	<tr>
-		<td id="tdc1" onclick="visibility('tdc1','show')"></td>
-		<td id="tdc2" onclick="visibility('tdc2','show')"></td>
-		<td id="tdc3" onclick="visibility('tdc3','show')"></td>
-	</tr>
-</table>
+		<!--
+		Žaidimas
+		-->
+		<script src="js/imageGameFunctions.js"></script>
+		<script>
+			fixImage('img/game/play/cat.jpg');
+		</script>
+		<table id="gameTable" cellspacing="0" cellpadding="0" style="border:1px solid white;border-spacing:1;border-collapse:collapse;background-size: cover">
+			<tr>
+				<td id="tda1" onclick="visibility('tda1','show')"></td>
+				<td id="tda2" onclick="visibility('tda2','show')"></td>
+				<td id="tda3" onclick="visibility('tda3','show')"></td>
+			</tr>
+			<tr>
+				<td id="tdb1" onclick="visibility('tdb1','show')"></td>
+				<td id="tdb2" onclick="visibility('tdb2','show')"></td>
+				<td id="tdb3" onclick="visibility('tdb3','show')"></td>
+				</td>
+			</tr>
+			<tr>
+				<td id="tdc1" onclick="visibility('tdc1','show')"></td>
+				<td id="tdc2" onclick="visibility('tdc2','show')"></td>
+				<td id="tdc3" onclick="visibility('tdc3','show')"></td>
+			</tr>
+		</table>
 
-<button onclick="visibilityAll('hide')">Žaisti iš naujo</button>
-<button onclick="visibilityAll('show')">Rodyti viską</button>
+		<button onclick="visibilityAll('hide')">Žaisti iš naujo</button>
+		<button onclick="visibilityAll('show')">Rodyti viską</button>
+</div>
 </body>
 </html>
