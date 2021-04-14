@@ -61,3 +61,6 @@ p{
 .dropdown:hover .dropdown-content{
 	display: block;
 }
+.dropd-button>center>p{
+	margin:0px;
+}
