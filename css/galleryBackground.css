@@ -1,0 +1,9 @@
+body{
+	background-image:url("../img/galleryBg.png");
+    background-position-y: top;
+	background-position-x: left;
+	background-size:cover;
+}
+html, body{
+    height:100%;
+}
