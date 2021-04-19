@@ -1,17 +1,5 @@
-.menu{
-	background-color: rgba(32,32,32,0.5);
-	border:1px solid;
-	border-color: black;
-	background-size: auto;
-	width:fit-content;
-	font-size: 150%;
-	position: fixed;
-	left:56.5%;
-	top:6%;
-}
-.dropdown-content:hover{
-	background-color: rgba(100,100,100,1);
-	display:block;
+a{
+	color:lightgray;
 }
 a:link{
 	color:lightgray;
@@ -22,21 +10,11 @@ a:visited{
 	text-decoration: none;
 }
 a:hover{
-	text-decoration: underline;
+	text-decoration: none;
+	color:lightgray;
 }
 a:active{
 	text-decoration: underline;
-}
-h1{
-	margin-top:10px;
-	margin-bottom:10px;
-	font-size:350%;
-}
-p{
-	margin-top:1px;
-	margin-bottom:1px;
-}
-.menu > a{
 	color:lightgray;
 }
 .item{
@@ -49,9 +27,6 @@ p{
 	font-size: 30px;
 	cursor:default;
 }
-
-/*new menu*/
-
 .dropdown-content{
 	display: none;
 	background-color: rgba(32,32,32,0.5);
@@ -65,6 +40,10 @@ p{
 }
 .dropdown:hover+.dropdown-content{
 	display: block;
+}
+.dropdown-content:hover{
+	background-color: rgba(10,10,100,0.7);
+	display:block;
 }
 .dropd-button>center>p{
 	margin:0px;
