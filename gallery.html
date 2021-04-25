@@ -72,7 +72,7 @@
         top:2vh;
         right:5vw;
         width:43vw;
-        height:50vh;
+        height:57vh;
         z-index: 1000;
         background-color: dimgray;
         border:2px black solid;
@@ -91,6 +91,9 @@
         cursor:pointer;
         color:white;
     }
+    .userComment{
+        height:23vh;
+    }
     .userComment,.allComments{
         border:black 1px solid;
         border-radius: 10px;
@@ -98,15 +101,17 @@
         padding:1vh;
     }
     .allComments{
-        height:24vh;
+        height:25vh;
         overflow:auto;
+        max-height: max-content;
+        margin-bottom: 0;
     }
     .comment{
         border:1px red solid;
         width:20vw;
         margin-bottom: 1vh;
         padding-left:1vw;
-        font-size:30px;
+        font-size:3vh;
     }
 </style>
 </head>
@@ -120,11 +125,11 @@
             <div class="commentsBox">
                 <div class="userComment">
                     <p class="commentsTitle">Parašyk komentarą:</p>
-                    <input id="commentSendName"  type="text" placeholder="Vardas" style="width:10vw"><br>
-                    <textarea id="commentSendBody" placeholder="Komentaras" style="width:20vw"></textarea><br>
+                    <input id="commentSendName" required type="text" placeholder="Vardas" style="width:10vw"><br>
+                    <textarea id="commentSendBody" required placeholder="Komentaras" style="width:20vw"></textarea><br>
                     <button class="sendButton" onclick="sendComment()">Siūsti</button>
                 </div>
-                <p class="commentsTitle" style="margin-left:0.8vw">Komentarai</p>
+                <p class="commentsTitle" style="margin-left:0.8vw;font-size:3vh">Komentarai</p>
                 <div class="allComments" style="color:white">
                     <div class="media">
                         <div class="media-body comment">

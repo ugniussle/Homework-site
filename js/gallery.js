@@ -91,7 +91,7 @@ function noScroll(){
 }
 var commentIndex=[1,2];
 var commentNames=['Edmundas','Edmundas'];
-var commentBodies=['Pirmoji nuotrauka iškart nuostabi 😳!!','Ptfu! Eh kodėl šitai postinai🙄 😯 😦 😧 😮 😲 ???'];
+var commentBodies=['Pirmoji nuotrauka iškart nuostabi 😳🔥👏🔥👏🔥!!','Ptfu! Eh kodėl šitai postinai🙄 😯 😦 😧 😮 😲 ???'];
 function loadComments(index){
     document.getElementsByClassName("allComments")[0].innerHTML="";
     for(let i=0;i<commentIndex.length;i++){
@@ -101,10 +101,11 @@ function loadComments(index){
     }
 }
 function sendComment(){
-    var index=document.getElementsByClassName("sendButton")[0].id;
-    index=parseInt(index.substring(3,index.length));
     var title=document.getElementById("commentSendName");
     var body=document.getElementById("commentSendBody");
+    if(title.value==""||body.value=="")return;
+    var index=document.getElementsByClassName("sendButton")[0].id;
+    index=parseInt(index.substring(3,index.length));
     commentIndex[commentIndex.length]=index;
     commentNames[commentIndex.length-1]=title.value;
     commentBodies[commentIndex.length-1]=body.value;
