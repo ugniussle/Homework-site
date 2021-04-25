@@ -15,6 +15,7 @@ var pictures=[
 "img/nodumb.jpg",
 "img/not that long legs BjarneStroustrup.jpg",
 "img/programming.png",
+"img/crow.jpg",
 ]
 var usedPicturesIndex=[];
 function randPic(){
