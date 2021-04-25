@@ -37,6 +37,7 @@ a:active{
 	min-width:25%;
 	margin-top: 47px;
 	margin-left: 50%;
+	z-index: 999;
 }
 .dropdown:hover+.dropdown-content{
 	display: block;

@@ -24,7 +24,7 @@ function createNav(){
 	document.getElementById("Darbai").className="dropdown dropd-button";*/
 	var insert=
 	`
-	<div class="container-fluid">
+	<div class="container-fluid nav-cont">
         <div class="row">
             <div class="item col-lg-3">
                 <center>

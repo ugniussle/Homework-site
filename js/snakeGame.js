@@ -173,7 +173,6 @@ function getRandomId(){ //get random id (not on the snake)
     while(true){  //dont generate tile on the snake (or food, or obstacles)
         id='x'+Math.floor(Math.random()*dim)+'y'+Math.floor(Math.random()*dim);
         let count=0;
-        let tile=document.getElementById('x'+getXFromId(id)+'y'+getYFromId(id));
         for(let i=0;i<snakePos.length;i++){
             if(snakePos[i]!=id)count++;
             else break;

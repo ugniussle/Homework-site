@@ -10,13 +10,138 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script>
-    
-</script>
+<script src="js/gallery.js"></script>
+<style>
+    .gallery-con{
+        width:80%;
+        height:80%;
+        border:2px solid black;
+        border-radius:10px;
+        margin-top:20px;
+        margin-left:10%;
+        margin-right:10%;
+        background-color: rgba(0,0,0,0.5);
+        color:lightgray;
+        padding:3px;
+        margin-bottom: 50px;
+    }
+    .gallery-con>img{
+        width:31%;
+        margin:1%;
+        border:2px solid black;
+        cursor:pointer;
+    }
+    #overlayImage>img{
+        position: absolute;
+        max-height:66vh;
+        max-width: 50vw;
+        right:50vw;
+        padding-left: 3vw;
+    }
+    #overlayImage{
+        width:66vw;
+        padding-top: 2vh;
+        padding-bottom: 2vh;
+        
+    }
+    .scrollTop{
+        border:2px solid black;
+        background-color: purple;
+        font-size: 100px;
+        margin-left:2%;
+        bottom: 0;
+        padding:-5px;
+        position:fixed;
+        cursor:pointer;
+        display:none;
+    }
+    .overlay{
+        display: none;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.6);
+        z-index: 5;
+    }
+    .commentsBox{
+        position: absolute;
+        top:2vh;
+        right:5vw;
+        width:43vw;
+        height:50vh;
+        z-index: 1000;
+        background-color: dimgray;
+        border:2px black solid;
+        
+    }
+    .commentsTitle{
+        font-size: 20px;
+        color:white;
+        margin:0;
+    }
+    .overlayExit{
+        position: absolute;
+        top:0;
+        right:1vw;
+        font-size: 50px;
+        cursor:pointer;
+        color:white;
+    }
+    .userComment,.allComments{
+        border:black 1px solid;
+        border-radius: 10px;
+        margin:1vh;
+        padding:1vh;
+    }
+    .allComments{
+        height:24vh;
+        overflow:auto;
+    }
+    .comment{
+        border:1px red solid;
+        width:20vw;
+        margin-bottom: 1vh;
+        padding-left:1vw;
+        font-size:30px;
+    }
+</style>
 </head>
-<body onpageshow="createNav()">
+<body onpageshow="createNav();setGallery(12)">
     <div class="container-fluid" style="padding:0px;">
         <div class="navbar-my"></div>
+        <div class="gallery-con"></div>
+        <div class="scrollTop" id="scrollTop" onclick="scrollToTop()">↑</div>
+        <div class="overlay">
+            <div id="overlayImage"></div>
+            <div class="commentsBox">
+                <div class="userComment">
+                    <p class="commentsTitle">Parašyk komentarą:</p>
+                    <input id="commentSendName"  type="text" placeholder="Vardas" style="width:10vw"><br>
+                    <textarea id="commentSendBody" placeholder="Komentaras" style="width:20vw"></textarea><br>
+                    <button class="sendButton" onclick="sendComment()">Siūsti</button>
+                </div>
+                <p class="commentsTitle" style="margin-left:0.8vw">Komentarai</p>
+                <div class="allComments" style="color:white">
+                    <div class="media">
+                        <div class="media-body comment">
+                            <p class="commentName">Vardenis Pavardenis <small>sako</small></p>
+                            <p class="commentBody">Gera nuotrauka</p>
+                        </div>
+                    </div>
+                    <div class="media">
+                        <div class="media-body comment">
+                            <p class="commentName">Vardenis Pavardenis <small>sako</small></p>
+                            <p class="commentBody">Gera nuotrauka</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlayExit" onclick="overlayOff()">X</div>
+        </div>
     </div>
 </body>
 </html>
