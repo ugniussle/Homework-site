@@ -13,11 +13,12 @@
 <script src="js/gallery.js"></script>
 <link rel="stylesheet" href="css/gallery.css">
 </head>
-<body onpageshow="createNav();setGallery(12)">
+<body onpageshow="createNav();setGallery(12);createNotification('Paspausk ant nuotraukos, kad rodyti komentarus',5000)">
     <div class="container-fluid" style="padding:0px;">
         <div class="navbar-my"></div>
         <div class="gallery-con"></div>
         <div class="scrollTop" id="scrollTop" onclick="scrollToTop()">↑</div>
+        <div class="notification"></div>
         <div class="overlay">
             <div id="overlayImage"></div>
             <div class="commentsBox">
@@ -28,20 +29,7 @@
                     <button class="sendButton" onclick="sendComment()">Siūsti</button>
                 </div>
                 <p class="commentsTitle" style="margin-left:0.8vw;font-size:3vh">Komentarai</p>
-                <div class="allComments" style="color:white">
-                    <div class="media">
-                        <div class="media-body comment">
-                            <p class="commentName">Vardenis Pavardenis <small>sako</small></p>
-                            <p class="commentBody">Gera nuotrauka</p>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <div class="media-body comment">
-                            <p class="commentName">Vardenis Pavardenis <small>sako</small></p>
-                            <p class="commentBody">Gera nuotrauka</p>
-                        </div>
-                    </div>
-                </div>
+                <div class="allComments" style="color:white"></div>
             </div>
             <div class="overlayExit" onclick="overlayOff()">X</div>
         </div>

@@ -37,8 +37,19 @@ function randPic(){
         }
     }
 }
-function createNotification(string){
-    
+function createNotification(string,ms){
+    var el=document.getElementsByClassName("notification")[0];
+    el.innerHTML=string;
+    el.style.display="block";
+    setTimeout(function(){el.style.border="5px solid red"},300);
+    setTimeout(function(){el.style.border="5px solid yellow"},600);
+    setTimeout(function(){el.style.border="5px solid red"},900);
+    setTimeout(function(){el.style.border="5px solid yellow"},1200);
+    setTimeout(function(){el.style.border="5px solid red"},1500);
+    setTimeout(function(){el.style.border="5px solid yellow"},1800);
+    setTimeout(function(){el.style.border="5px solid red"},2100);
+    setTimeout(function(){el.style.border="5px solid yellow"},2400);
+    setTimeout(function(){el.style.display="none"},ms)
 }
 function addPicture(){
     var pic=randPic();
