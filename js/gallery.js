@@ -37,6 +37,9 @@ function randPic(){
         }
     }
 }
+function createNotification(string){
+    
+}
 function addPicture(){
     var pic=randPic();
     if(pic=="error")return;
