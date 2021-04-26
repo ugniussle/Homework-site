@@ -21,43 +21,7 @@ var snakeLength=0;
 var snakePos=[];  //snake element array
 var moveLoopObj;
 var snakeSpeed;
-window.addEventListener("keydown",function(event){
-    if(event.code=='Enter'||event.code=='ArrowLeft'||event.code=='ArrowRight'||event.code=='ArrowUp'||event.code=='ArrowDown'){
-        let x,y,id;
-        if(snakeLength>0){
-            id=snakePos[snakePos.length-1];
-            x=getXFromId(id);
-            y=getYFromId(id);
-        }
-        switch(event.code){
-            case 'Enter':
-                if(snakeLength==0)startGame();
-                moveLoopObj=setTimeout(moveLoop,snakeSpeed);
-                break;
-            case 'ArrowLeft':
-                clearTimeout(moveLoopObj);
-                move(x,y-1);
-                moveLoopObj=setTimeout(moveLoop,snakeSpeed);
-                break;
-            case 'ArrowRight':
-                clearTimeout(moveLoopObj);
-                move(x,y+1);
-                moveLoopObj=setTimeout(moveLoop,snakeSpeed);
-                break;
-            case 'ArrowUp':
-                clearTimeout(moveLoopObj);
-                move(x-1,y);
-                moveLoopObj=setTimeout(moveLoop,snakeSpeed);
-                break;
-            case 'ArrowDown':
-                clearTimeout(moveLoopObj);
-                move(x+1,y);
-                moveLoopObj=setTimeout(moveLoop,snakeSpeed);
-                break;
-        }
-        
-    }
-},true);
+
 function startGame(){
     console.log('startgame');
     snakeSpeed=parseInt(document.getElementById("snakeSpeed").value,10);

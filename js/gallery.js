@@ -41,7 +41,7 @@ function createNotification(string,ms){
     var el=document.getElementsByClassName("notification")[0];
     el.innerHTML=string;
     el.style.display="block";
-    for(let i=300;i<3000;i=i+600){
+    for(let i=300;i<6000;i=i+600){
         setTimeout(function(){el.style.border="5px solid red"},i);
         setTimeout(function(){el.style.border="5px solid yellow"},i+300);
     }
@@ -55,12 +55,13 @@ function addPicture(){
     document.getElementById(usedPicturesIndex.length).src=pic;
     
 }
+var maxPictures=0;
 function setGallery(picNum){
-    var galCon=document.getElementsByClassName("gallery-con")[0];
     for(let i=0;i<picNum;i++){
         addPicture();
     }
     setOnClick(picNum);
+    maxPictures=picNum;
 }
 function setOnClick(picNum){
     for(let i=1;i<=picNum;i++){
@@ -134,3 +135,25 @@ function addComment(index){
     `
     document.getElementsByClassName("allComments")[0].innerHTML+=string;
 }
+window.addEventListener("keydown",function(event){
+    var index=document.getElementsByClassName("sendButton")[0].id;
+    index=parseInt(index.substring(3,index.length));
+    if((event.code=='Enter'||event.code=='ArrowLeft'||event.code=='ArrowRight'||event.code=="Escape")&&document.getElementsByClassName("overlay")[0].style.display=="block"){
+        console.log(event.code);
+        switch(event.code){
+            case 'ArrowLeft':
+                if(index==1)break;
+                //overlayOff();
+                zoom(index-1);
+                break;
+            case 'ArrowRight':
+                if(index==maxPictures)break;
+                //overlayOff();
+                zoom(index+1);
+                break;
+            case 'Escape':
+                overlayOff();
+                break;
+        }
+    }
+},true);
