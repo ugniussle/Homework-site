@@ -1,39 +1,41 @@
-var pictures=[
-"img/a.jpg",
-"img/abandoned house.jpg",
-"img/background.jpg",
-"img/bread replica.jpg",
-"img/cat.jpg",
-"img/tree.jpg",
-"img/tree2.jpg",
-"img/water.jpg",
-"img/wood.jpg",
-"img/i live with pain.jpg",
-"img/iamin2.jpg",
-"img/iamin.png",
-"img/long legs.jpg",
-"img/nodumb.jpg",
-"img/not that long legs BjarneStroustrup.jpg",
-"img/programming.png",
-"img/crow.jpg",
-]
+var pictures={
+    "link":[
+        "img/a.jpg",
+        "img/abandoned house.jpg",
+        "img/background.jpg",
+        "img/bread replica.jpg",
+        "img/cat.jpg",
+        "img/tree.jpg",
+        "img/tree2.jpg",
+        "img/water.jpg",
+        "img/wood.jpg",
+        "img/i live with pain.jpg",
+        "img/iamin2.jpg",
+        "img/iamin.png",
+        "img/long legs.jpg",
+        "img/nodumb.jpg",
+        "img/not that long legs BjarneStroustrup.jpg",
+        "img/programming.png",
+        "img/crow.jpg",
+    ]
+}
 var usedPicturesIndex=[];
 function randPic(){
-    var index=Math.floor(Math.random()*pictures.length);
+    var index=Math.floor(Math.random()*pictures.link.length);
     if(usedPicturesIndex.length==0){
         usedPicturesIndex[usedPicturesIndex.length]=index;
-        return pictures[index];
+        return pictures.link[index];
     }
     while(true){
-        index=Math.floor(Math.random()*pictures.length);
+        index=Math.floor(Math.random()*pictures.link.length);
         let count=0;
-        if(usedPicturesIndex.length==pictures.length)return "error";
+        if(usedPicturesIndex.length==pictures.link.length)return "error";
         for(let i=0;i<usedPicturesIndex.length;i++){
             if(index!=usedPicturesIndex[i])count++;
         }
         if(count==usedPicturesIndex.length){
             usedPicturesIndex[usedPicturesIndex.length]=index;
-            return pictures[index];
+            return pictures.link[index];
         }
     }
 }
@@ -61,11 +63,18 @@ function setGallery(picNum){
         addPicture();
     }
     setOnClick(picNum);
+    setOnHover(picNum);
     maxPictures=picNum;
 }
 function setOnClick(picNum){
     for(let i=1;i<=picNum;i++){
         document.getElementById(i).setAttribute("onclick","zoom("+i+")");
+    }
+}
+function setOnHover(picNum){
+    for(let i=1;i<=picNum;i++){
+        document.getElementById(i).setAttribute("onmouseover","highlight("+i+","+0.4+")");
+        document.getElementById(i).setAttribute("onmouseleave","highlight("+i+","+0+")");
     }
 }
 function zoom(id){
@@ -74,6 +83,10 @@ function zoom(id){
     document.getElementById("overlayImage").innerHTML="<img src='"+pic+"'>";
     loadComments(id);
     document.getElementsByClassName("sendButton")[0].id="img"+id;
+}
+function highlight(id,intens){
+    var pic=document.getElementById(id);
+    pic.style.backgroundColor="rgba(0,0,0,"+intens+")";
 }
 function scrollToTop(){
     window.scroll(0,0);
@@ -143,12 +156,10 @@ window.addEventListener("keydown",function(event){
         switch(event.code){
             case 'ArrowLeft':
                 if(index==1)break;
-                //overlayOff();
                 zoom(index-1);
                 break;
             case 'ArrowRight':
                 if(index==maxPictures)break;
-                //overlayOff();
                 zoom(index+1);
                 break;
             case 'Escape':

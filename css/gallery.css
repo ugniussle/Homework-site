@@ -13,8 +13,8 @@
 }
 .gallery-con>img{
     width:31%;
-    margin:1%;
-    border:2px solid black;
+    padding:1%;
+    border:0px solid black;
     cursor:pointer;
 }
 #overlayImage>img{
