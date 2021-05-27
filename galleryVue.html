@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+<title>Gallery(Vue)</title>
+<link rel="stylesheet" href="css/galleryBackground.css">
+<link rel="stylesheet" href="css/menu.css">
+<script src="js/menu.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="js/gallery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<link rel="stylesheet" href="css/gallery.css">
+</head>
+<body onpageshow="createNav();setGallery(12);createNotification('Paspausk ant nuotraukos, kad rodyti komentarus',10000)">
+    <div class="container-fluid" style="padding:0px;">
+        <div class="navbar-my"></div>
+        <div class="gallery-con"></div>
+        <div class="scrollTop" id="scrollTop" onclick="scrollToTop()">↑</div>
+        <div class="notification" onclick="document.getElementsByClassName('notification')[0].style.display='none';"></div>
+        <div class="overlay">
+            <div id="overlayImage"></div>
+            <div class="commentsBox">
+                <div class="userComment">
+                    <center>
+                        <p class="commentsTitle">Parašyk komentarą:</p>
+                        <input id="commentSendName" required type="text" placeholder="Vardas" style="width:10vw"><br>
+                        <textarea id="commentSendBody" required placeholder="Komentaras" style="width:20vw"></textarea><br>
+                        <button class="sendButton" onclick="sendComment()">Siūsti</button>
+                    </center>
+                </div>
+                <p class="commentsTitle" style="margin-left:0.8vw;font-size:3vh">Komentarai</p>
+                <div class="allComments" style="color:white"></div>
+            </div>
+            <div class="overlayExit" onclick="overlayOff()">X</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<html>
+<head>
+<title>Gallery(Vue)</title>
+<link rel="stylesheet" href="css/galleryBackground.css">
+<link rel="stylesheet" href="css/menu.css">
+<script src="js/menu.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script src="js/galleryVue.js"></script>
+<link rel="stylesheet" href="css/gallery.css">
+</head>
+<body onpageshow="createNav()">
+    <div class="container-fluid" style="padding:0px;">
+        <div class="navbar-my"></div>
+        <div class="gallery-con">
+            <Images
+                v-for="item in links"
+                v-bind:image="item"
+            ></Images>
+        </div>
+        <div class="notification"></div>
+        <div v-show=0 class="overlay">
+            <div class="commentsBox">
+                <div class="userComment">
+                    <center>
+                        <p class="commentsTitle">Parašyk komentarą:</p>
+                        <input id="commentSendName" required type="text" placeholder="Vardas" style="width:10vw"><br>
+                        <textarea id="commentSendBody" required placeholder="Komentaras" style="width:20vw"></textarea><br>
+                        <button class="sendButton" @click="addComment()">Siūsti</button>
+                    </center>
+                </div>
+                <p class="commentsTitle" style="margin-left:0.8vw;font-size:3vh">Komentarai</p>
+                <div class="allComments" style="color:white">
+                    <comments
+                        v-for="item in comments"
+                        v-bind:key="comments.id"
+                        v-bind:comment="item"
+                    ></comments>
+                </div>
+            </div>
+            <div class="overlayExit" onclick="overlayOff()">X</div>
+        </div>
+        <div id="overlayImage"></div>
+    </div>
+    <script>
+        var overlApp=new Vue({
+            el:'.overlay',
+            data:{
+                comments:[
+                    {id:0,title:"person",text:"asd"},
+                    {id:2,title:"person",text:"asd"},
+                    {id:3,title:"person",text:"asd"},
+                    {id:4,title:"person",text:"asd"},
+                    {id:1,title:"person",text:"asd"},
+                    {id:5,title:"person",text:"asd"},
+                    {id:6,title:"person",text:"asd"},
+                    {id:7,title:"person",text:"asd"},
+                    {id:8,title:"person",text:"asd"},
+                    {id:9,title:"person",text:"asd"},
+                    {id:10,title:"person",text:"asd"},
+                    {id:11,title:"person",text:"asd"},
+                    {id:12,title:"person",text:"asd"},
+                    {id:13,title:"person",text:"asd"},
+                    {id:14,title:"person",text:"asd"},
+                    {id:15,title:"person",text:"asd"},
+                    {id:16,title:"person",text:"asd"},
+                ],
+            },
+            methods:{
+                addComment:function(){
+                    var name=document.getElementById("commentSendName").value;
+                    var body=document.getElementById("commentSendBody").value;
+                    if(name.value==""||body.value=="")return;
+                    var idN = document.getElementsByClassName("sendButton")[0].id;
+                    var el=this.comments;
+                    var json={id:idN,title:name,text:body}
+                    el.push(json)
+                    //overlayOff()
+                    //overlayOn(document.getElementsByClassName("sendButton")[0].id)
+
+                }
+            }
+        })
+        var galInit = new Vue({
+            el: '.gallery-con',
+            data: {
+                links: [
+                    {id:0,text:"img/a.jpg"},
+                    {id:1,text:"img/abandoned house.jpg"},
+                    {id:2,text:"img/background.jpg"},
+                    {id:3,text:"img/bread replica.jpg"},
+                    {id:4,text:"img/cat.jpg"},
+                    {id:5,text:"img/tree.jpg"},
+                    {id:6,text:"img/tree2.jpg"},
+                    {id:7,text:"img/water.jpg"},
+                    {id:8,text:"img/wood.jpg"},
+                    {id:9,text:"img/i live with pain.jpg"},
+                    {id:10,text:"img/iamin2.jpg"},
+                    {id:11,text:"img/iamin.png"},
+                    {id:12,text:"img/long legs.jpg"},
+                    {id:13,text:"img/nodumb.jpg"},
+                    {id:14,text:"img/not that long legs BjarneStroustrup.jpg"},
+                    {id:15,text:"img/programming.png"},
+                    {id:16,text:"img/crow.jpg"},
+                ],
+                
+            },
+            created(){
+                shuffle(this.links)
+            },
+            
+        })
+    </script>
+</body>
+</html>
