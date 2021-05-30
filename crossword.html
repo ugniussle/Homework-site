@@ -2,54 +2,116 @@
 <meta charset="utf-8">
 <html>
 <head>
-<title>Pagrindinis puslapis</title>
-<link rel="stylesheet" href="css/galleryBackground.css">
-<link rel="stylesheet" href="css/menu.css">
-<script src="js/menu.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://kit.fontawesome.com/c032e2f814.js" crossorigin="anonymous"></script>
+    <title>Kryžiažodis</title>
+    <link rel="stylesheet" href="css/galleryBackground.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <script src="js/menu.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
-<style>
-    td{
-        width:  7vh;
-        height: 7vh;
-        padding:0;
-        color:white;
-    }
-    #boardDiv{
-        background-color: rgba(0,0,0,0.4);
-        right: 50vw;
-        left:  50vw;
-        margin:auto;
-        margin-top: 3vh;
-		padding: 0;
-		width: max-content;
-		max-width: 2000px;
-		color:black;
-		border: 4px solid white;
-		font-size: 180%;
-    }
-    td>.withLetter{
-        background-color: black;
-    }
-    td>input{
-        width: 7vh;
-        height:7vh;
-        border:2px solid black;
-        padding:0;
-        background-color: darkgray;
-        text-align: center;
-        text-transform: uppercase;
-    }
-</style>
+    <style>
+        td{
+            width:  7vh;
+            height: 7vh;
+            padding:0;
+            color:white;
+        }
+        #boardDiv{
+            background-color: rgba(0,0,0,0.4);
+            right: 50vw;
+            left:  50vw;
+            margin:auto;
+            margin-top: 3vh;
+            padding: 0;
+            width: max-content;
+            max-width: 2000px;
+            color:black;
+            border: 4px solid white;
+            font-size: 180%;
+        }
+        td>.withLetter{
+            background-color: black;
+        }
+        td>input{
+            width: 7vh;
+            height:7vh;
+            border:2px solid black;
+            padding:0;
+            background-color: darkgray;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        .howToPlay{
+            position: absolute;
+            width: 17vw;
+            top: 10vh;
+            height: 50vh;
+            right: 0;
+            border: black solid 3px;
+            background-color: rgba(0,0,0,0.4);
+            color:lightgray;
+            font-size: 2vw;
+        }
+        .direction{
+            border: black solid 3px;
+            background-color: rgba(0,0,0,0.4);
+            color:lightgray;
+            position: absolute;
+            width: 12vw;
+            top: 61vh;
+            height: 13vw;
+            right:0;
+            font-size: 3vh;
+        }
+        #description{
+            position: absolute;
+            background-color: rgba(0,0,0,0.4);
+            left:  0vw;
+            top:47px;
+            margin:auto;
+            margin-top: 3vh;
+            padding: 0;
+            width: 20vw;
+            height: max-content;
+            max-width: 2000px;
+            color:lightgray;
+            border: 4px solid white;
+            font-size: 1.5vw;
+        }
+        h1{
+            margin:auto;
+            font-size: 1.7vw;
+        }
+        div>p{
+            font-size: 1.4vw;
+            color:lightyellow;
+        }
+        .fas{
+            font-size: 13vw;
+            color:red;
+        }
+    </style>
 </head>
 
-<body onpageshow="createNav();genBoard(10,10);">
+<body onpageshow="createNav();genBoard(12,12);">
 	<div class="navbar-my"></div>
     <div id="boardDiv"></div>
-    <button onclick="solveAll()">Solve</button><button onclick="resetCross()">Reset</button>
+    <div id="description"></div>
+    <div tabindex="2" class="direction">Spauskite rodyklę (dešinė arba apačia)</div>
+    <div class="howToPlay">
+        <center><h1>Kaip žaisti :</h1></center>
+        <p>
+            Paspauskite rodyklės klavišus į dešinę ar apačią, kad pasirinkti žodžio rašymo kryptį.<br><br>
+            Su 'Tab' ir 'Shift'+'Tab' klavišais eikite per žodžius.
+        </p>
+    </div>
+    <center>
+        <button tabindex="99" onclick="solveAll()">Išspręsti</button><button tabindex="100" onclick="resetCross()">Žaisti iš naujo</button>
+    </center>
+    
     <script src="js/crossword.js"></script>
 </body>
 </html>
