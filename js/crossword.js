@@ -26,7 +26,7 @@ async function getWord(){
 var words=["word","width","disc","reset","tangerine"];
 var pos=["x0y0","x0y0","x0y2","x2y0","x2y4"];
 var direction=["right","down","right","down","right"];
-var descriptions=["a composition of letters","how wide something is","Optical storage media","Restore something to initial state","Similar fruit to orange"];
+var descriptions=["A composition of letters","How wide something is","Optical storage media","Restore something to initial state","Similar fruit to orange"];
 var selectDirection="";
 var X,Y;
 /*async function genWords(){
