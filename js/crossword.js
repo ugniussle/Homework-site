@@ -6,6 +6,7 @@ async function getWord(){
             "x-rapidapi-host": "random-words-with-pronunciation.p.rapidapi.com"
         }
     })
+    console.log(res)
     let data = await res.json()
     let ret=[]
     console.log(data)
@@ -39,7 +40,7 @@ function isGoodWord(x){
 }
 
 function genBoard(size1,size2){
-    genWords()
+    //genWords()
     var div = document.getElementById("boardDiv")
     div.innerHTML+="<table id='board' style='border-collapse:collapse;cellpadding:0px'>";
     var board = document.getElementById("board")
@@ -51,8 +52,8 @@ function genBoard(size1,size2){
         board.innerHTML+="</tr>";
     }
     div.innerHTML+="</table>";
-    //genCrossword()
-    //addWords()
+    genCrossword()
+    addWords()
 }
 function addWords(){
     for(i=0;i<words.length;i++){
