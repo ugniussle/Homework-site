@@ -1,28 +1,18 @@
-/*class Word{
-    constructor(name,desc,x,y){
-        this.name=name
-        this.length=name.length
-        this.xPos=x
-        this.yPos=y
-        this.description=desc
-    }
-    isMatchingLetter(otherWord){
-        return true
-    }
-}
-class Board{
-    constructor(){
-        this.words=new Word
-    }
-}
 async function getWord(){
-    let res=await fetch("https://random-words-api.vercel.app/word")
+    let res=await fetch("https://random-words-with-pronunciation.p.rapidapi.com/word", {
+        "method": "GET",
+        "headers": {
+            "x-rapidapi-key": "40afc0403fmshd3b95eb22fcf51fp1ecdb5jsnf871a1551991",
+            "x-rapidapi-host": "random-words-with-pronunciation.p.rapidapi.com"
+        }
+    })
     let data = await res.json()
     let ret=[]
+    console.log(data)
     ret[0]=data[0].word
     ret[1]=data[0].definition
     return ret
-}*/
+}
 //var words=["word","width","disc","reset","tangerine"];
 //var pos=["x0y0","x0y0","x0y2","x2y0","x2y4"];
 
@@ -31,13 +21,12 @@ var words=[],pos=[],direction=[]
 var descriptions=[];
 var selectDirection="";
 var X,Y;
-/*async function genWords(){
-    for(i=0;i<10;i++){
+async function genWords(){
+    for(i=0;i<2;i++){
         getWord()
-            .then(ret=>{
-                words[words.length]=ret[0]
-                descriptions[descriptions.length]=ret[1]
-            })
+        .then(ret=>{
+            console.log(ret[0],ret[1])
+        })
     }
 }
 function isGoodWord(x){
@@ -47,9 +36,10 @@ function isGoodWord(x){
             if(words[i]);
         }
     }
-}*/
+}
 
 function genBoard(size1,size2){
+    genWords()
     var div = document.getElementById("boardDiv")
     div.innerHTML+="<table id='board' style='border-collapse:collapse;cellpadding:0px'>";
     var board = document.getElementById("board")
@@ -61,8 +51,8 @@ function genBoard(size1,size2){
         board.innerHTML+="</tr>";
     }
     div.innerHTML+="</table>";
-    genCrossword()
-    addWords()
+    //genCrossword()
+    //addWords()
 }
 function addWords(){
     for(i=0;i<words.length;i++){
