@@ -23,10 +23,12 @@ async function getWord(){
     ret[1]=data[0].definition
     return ret
 }*/
-var words=["word","width","disc","reset","tangerine"];
-var pos=["x0y0","x0y0","x0y2","x2y0","x2y4"];
-var direction=["right","down","right","down","right"];
-var descriptions=["A composition of letters","How wide something is","Optical storage media","Restore something to the initial state","Similar fruit to orange"];
+//var words=["word","width","disc","reset","tangerine"];
+//var pos=["x0y0","x0y0","x0y2","x2y0","x2y4"];
+
+//var direction=["right","down","right","down","right"];
+var words=[],pos=[],direction=[]
+var descriptions=[];
 var selectDirection="";
 var X,Y;
 /*async function genWords(){
@@ -59,6 +61,7 @@ function genBoard(size1,size2){
         board.innerHTML+="</tr>";
     }
     div.innerHTML+="</table>";
+    genCrossword()
     addWords()
 }
 function addWords(){
@@ -82,7 +85,7 @@ function addWords(){
     addEvListeners()
 }
 function getX(id){return parseInt(id.substring(id.indexOf('x')+1,id.indexOf('y')),10); }
-function getY(id){return parseInt(id.substring(id.indexOf('y')+1,id.length),10); } 
+function getY(id){return parseInt(id.substring(id.indexOf('y')+1,id.length),10); }
 function addEvListeners(){
     var els=document.getElementsByClassName("input")
     for(i=0;i<els.length;i++){
@@ -99,7 +102,7 @@ function addEvListeners(){
             if(cellId==pos[j])
                 el.tabIndex=0;
     }
-    genIndexes()
+    
 }
 function genIndexes(){
     let count=1;
@@ -259,3 +262,130 @@ document.addEventListener('keyup', function(event) {
         }
     }
 });
+function genCrossword(){
+    for(let i=0;i<12;i++){
+        for(let j=0;j<12;j++){
+            let a=document.getElementById("x"+i+"y"+j)
+            if(a.innerHTML=="")console.log(a.innerHTML)
+        }
+    }
+    var inWords=["word","width","drive","reset","tangerine","desynchronize","sound","accent"]
+    var inDescription=["A composition of letters","How wide something is","Storage media","Restore something to the initial state","Similar fruit to orange","stop being in sync (v)","what we hear","a different way that people speak"];
+    if(words.length==0){
+        words[0]=inWords[0]
+        pos[0]="x6y6"
+        direction[0]="right"
+        descriptions[0]=inDescription[0]
+        inWords.splice(0,1)
+        inDescription.splice(0,1)
+        addWords()
+    }
+    let asd=4
+    while(asd>0){
+        for(let i=0;i<inWords.length;i++){
+            var matches
+            for(let j=0;j<words.length;j++){
+              //maybe switch loops to generate all possible matches for one word and then choose
+                let word=words[j],inWord=inWords[i],p=pos[j],dir=direction[j]
+                console.log(word,inWord,p,dir)
+                matches=matchPos(word,inWord,p,dir,i)
+                console.log(matches)
+                matches=cullMatches(matches,word,inWord,dir)
+                console.log(matches)
+                if(matches.length>0){
+                    var rand=Math.floor(Math.random()*(matches.length/6))*6
+                    console.log(matches[rand+3],"added rand is",rand)
+                    words[words.length]=matches[rand+3]
+                    pos[pos.length]=matches[rand+0]
+                    descriptions[descriptions.length]=inDescription[matches[5+rand]]
+                    direction[direction.length]=matches[rand+4]
+                    inWords.splice(matches[5+rand],1)
+                    inDescription.splice(matches[5+rand],1)
+                    break
+                }
+            }
+            
+            addWords()
+            
+        }
+        asd--
+    }
+    genIndexes()
+    genDesc()
+}
+function matchPos(word,checkWord,wordPos,dir,index){
+    
+    var x=getX(wordPos),y=getY(wordPos)
+    var matches=[]
+    for(let i=0;i<word.length;i++){
+        for(j=0;j<checkWord.length;j++){
+            if(checkWord[j]==word[i]){
+                matches.push(`x${x}y${y}`,checkWord[j],j,checkWord)   //FIX POS
+                
+                if(dir=="right")matches.push("down")
+                else matches.push("right")
+
+                matches.push(index)
+            }
+        }
+        if(dir=="right")x++
+        else y++
+    }
+    
+    return matches
+}
+function cullMatches(matches,word,checkWord,dir){
+    if(dir=="right")dir="down"
+    else dir="right"
+    var newMatches=[]
+    for(let i=0;i<matches.length;i=i+6){
+        let pos=matches[i],matchedLetter=matches[i+1],matchPos=matches[i+2]
+        var x=getX(pos),y=getY(pos)
+        let check=0
+        let Y,X
+        if(dir=="right"){
+            Y=y
+            X=x-matchPos
+        }
+        else {
+            Y=y-matchPos
+            X=x
+        }
+        matches[i]=`x${X}y${Y}`
+        for(let j=0;j<checkWord.length;j++){
+            let pos="x"+X+"y"+Y
+            console.log("checking",pos,"for",word,checkWord)
+            let el=document.getElementById(pos)
+            if(typeof(el)=="undefined"||el==null){
+                console.log("break for",checkWord,"on",matches[i],"because el is undef")
+                break
+            }
+            else if(el.innerHTML==""||el.innerHTML!=""){
+                pos="in"+pos
+                el=document.getElementById(pos)
+                if(typeof(el)=="undefined"||el==null){
+                    //console.log("pos is undefined")
+                    check++
+                }
+                else{
+                    if(el.dataset.neededLetter==matchedLetter){
+                        //console.log("pos matches letters")
+                        check++
+                        console.log(el.dataset.neededLetter,matchedLetter)
+                    }
+                    else break
+                }
+            }
+            if(dir=="right")X++
+            else Y++
+        }
+        if(check!=checkWord.length){
+            matches.splice(i,6)
+        }
+        else{
+            newMatches.push(matches[i+0],matches[i+1],matches[i+2],matches[i+3],matches[i+4],matches[i+5])
+            console.log("adding",checkWord,"because",check,'=',checkWord.length)
+        }
+    }
+    return newMatches
+}
