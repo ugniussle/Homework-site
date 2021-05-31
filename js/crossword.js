@@ -104,7 +104,7 @@ function genIndexes(){
             div.innerHTML+=`<div id="dec${pos[i]}">${count}</div>`
             div=document.getElementById(`dec${pos[i]}`)             //need to calculate vw
             div.style.position="absolute"
-            div.style.marginTop="-7.3vh"
+            div.style.marginTop="-5.5vh"
             div.style.marginLeft="0.2vw"
             div.style.fontSize="20px"
             div.style.color="darkred"
@@ -264,7 +264,7 @@ function genCrossword(){
     var inDescription=["A composition of letters","How wide something is","Storage media","Restore something to the initial state","Similar fruit to orange","stop being in sync (v)","what we hear","a different way that people speak"];
     if(words.length==0){
         words[0]=inWords[0]
-        pos[0]="x6y6"
+        pos[0]="x5y5"
         direction[0]="right"
         descriptions[0]=inDescription[0]
         inWords.splice(0,1)
@@ -379,4 +379,15 @@ function cullMatches(matches,word,checkWord,dir){
         }
     }
     return newMatches
+}
+function regenCrossword(){
+    var div = document.getElementById("boardDiv")
+    div.innerHTML=""
+    words=[]
+    descriptions=[]
+    pos=[]
+    direction=[]
+    genBoard(20,20)
+    
+
 }
