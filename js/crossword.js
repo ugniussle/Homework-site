@@ -99,7 +99,7 @@ function genIndexes(){
             div.style.position="absolute"
             div.style.marginTop="-2vh"
             div.style.marginLeft="0.2vw"
-            div.style.fontSize="17px"
+            div.style.fontSize="2vh"
             div.style.color="darkred"
             count++
         }
