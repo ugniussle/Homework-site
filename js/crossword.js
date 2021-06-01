@@ -95,9 +95,9 @@ function genIndexes(){
         if(typeof(el)=="undefined"||el==null){
             var div=document.getElementById(pos[i])
             div.innerHTML+=`<div id="dec${pos[i]}">${count}</div>`
-            div=document.getElementById(`dec${pos[i]}`)             //need to calculate vw
+            div=document.getElementById(`dec${pos[i]}`)
             div.style.position="absolute"
-            div.style.marginTop="-2vh"
+            div.style.marginTop="-2.2vh"
             div.style.marginLeft="0.2vw"
             div.style.fontSize="2vh"
             div.style.color="darkred"
