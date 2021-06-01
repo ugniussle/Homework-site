@@ -97,7 +97,7 @@ function genIndexes(){
             div.innerHTML+=`<div id="dec${pos[i]}">${count}</div>`
             div=document.getElementById(`dec${pos[i]}`)             //need to calculate vw
             div.style.position="absolute"
-            div.style.marginTop="-4.5vh"
+            div.style.marginTop="-2vh"
             div.style.marginLeft="0.2vw"
             div.style.fontSize="17px"
             div.style.color="darkred"
