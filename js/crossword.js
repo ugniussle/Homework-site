@@ -6,10 +6,8 @@ async function getWord(){
             "x-rapidapi-host": "random-words-with-pronunciation.p.rapidapi.com"
         }
     })
-    console.log(res)
-    let data = await res.json()
+    let data =await res.json()
     let ret=[]
-    console.log(data)
     ret[0]=data[0].word
     ret[1]=data[0].definition
     return ret
@@ -21,22 +19,18 @@ async function getWord(){
 var words=[],pos=[],direction=[]
 var descriptions=[];
 var selectDirection="";
+//var inWords=[],inDescription=[]
 var X,Y;
 async function genWords(){
-    for(i=0;i<2;i++){
-        getWord()
+    var output=[]
+    for(i=0;i<10;i++){
+        await getWord()
         .then(ret=>{
-            console.log(ret[0],ret[1])
+            console.log(ret)
+            output.push(ret)
         })
     }
-}
-function isGoodWord(x){
-    let letters=[]
-    for(i=0;i<words.length;i++){
-        for(j=0;j<words[0].length;k++){
-            if(words[i]);
-        }
-    }
+    return output
 }
 
 function genBoard(size1,size2){
@@ -53,7 +47,6 @@ function genBoard(size1,size2){
     }
     div.innerHTML+="</table>";
     genCrossword()
-    addWords()
 }
 function addWords(){
     for(i=0;i<words.length;i++){
@@ -104,9 +97,9 @@ function genIndexes(){
             div.innerHTML+=`<div id="dec${pos[i]}">${count}</div>`
             div=document.getElementById(`dec${pos[i]}`)             //need to calculate vw
             div.style.position="absolute"
-            div.style.marginTop="-5.5vh"
+            div.style.marginTop="-4.5vh"
             div.style.marginLeft="0.2vw"
-            div.style.fontSize="20px"
+            div.style.fontSize="17px"
             div.style.color="darkred"
             count++
         }
@@ -150,7 +143,7 @@ function checkWords(){
         for(j=0;j<words[i].length;j++){
             var id='inx'+x+'y'+y;
             var el = document.getElementById(id)
-            if(el.value==el.dataset.neededLetter)count++
+            if(el.value.toLowerCase()==el.dataset.neededLetter.toLowerCase())count++
             if(direction[i]=='right')x++
             else y++
         }
@@ -253,18 +246,22 @@ document.addEventListener('keyup', function(event) {
         }
     }
 });
-function genCrossword(){
-    for(let i=0;i<12;i++){
-        for(let j=0;j<12;j++){
-            let a=document.getElementById("x"+i+"y"+j)
-            if(a.innerHTML=="")console.log(a.innerHTML)
+async function genCrossword(){
+    var inWords=[],inDescription=[]
+    if(document.getElementById("genOrNo").checked==false){
+        inWords=["word","width","drive","reset","tangerine","desynchronize","sound","accent"]
+        inDescription=["A composition of letters","How wide something is","Storage media","Restore something to the initial state","Similar fruit to orange","stop being in sync (v)","what we hear","a different way that people speak"];
+    }
+    else{
+        var arr=await genWords()
+        for(let i=0;i<arr.length;i++){
+            inWords[i]=arr[i][0]
+            inDescription[i]=arr[i][1]
         }
     }
-    var inWords=["word","width","drive","reset","tangerine","desynchronize","sound","accent"]
-    var inDescription=["A composition of letters","How wide something is","Storage media","Restore something to the initial state","Similar fruit to orange","stop being in sync (v)","what we hear","a different way that people speak"];
     if(words.length==0){
         words[0]=inWords[0]
-        pos[0]="x5y5"
+        pos[0]="x3y5"
         direction[0]="right"
         descriptions[0]=inDescription[0]
         inWords.splice(0,1)
@@ -274,18 +271,16 @@ function genCrossword(){
     let asd=4
     while(asd>0){
         for(let i=0;i<inWords.length;i++){
-            var matches
             for(let j=0;j<words.length;j++){
-              //maybe switch loops to generate all possible matches for one word and then choose
+                let matches
                 let word=words[j],inWord=inWords[i],p=pos[j],dir=direction[j]
                 console.log(word,inWord,p,dir)
                 matches=matchPos(word,inWord,p,dir,i)
-                console.log(matches)
                 matches=cullMatches(matches,word,inWord,dir)
                 console.log(matches)
                 if(matches.length>0){
                     var rand=Math.floor(Math.random()*(matches.length/6))*6
-                    console.log(matches[rand+3],"added rand is",rand)
+                    console.log(matches[rand+3],"added")
                     words[words.length]=matches[rand+3]
                     pos[pos.length]=matches[rand+0]
                     descriptions[descriptions.length]=inDescription[matches[5+rand]]
@@ -295,9 +290,7 @@ function genCrossword(){
                     break
                 }
             }
-            
             addWords()
-            
         }
         asd--
     }
@@ -345,22 +338,18 @@ function cullMatches(matches,word,checkWord,dir){
         matches[i]=`x${X}y${Y}`
         for(let j=0;j<checkWord.length;j++){
             let pos="x"+X+"y"+Y
-            console.log("checking",pos,"for",word,checkWord)
             let el=document.getElementById(pos)
             if(typeof(el)=="undefined"||el==null){
-                console.log("break for",checkWord,"on",matches[i],"because el is undef")
                 break
             }
             else if(el.innerHTML==""||el.innerHTML!=""){
                 pos="in"+pos
                 el=document.getElementById(pos)
                 if(typeof(el)=="undefined"||el==null){
-                    //console.log("pos is undefined")
                     check++
                 }
                 else{
                     if(el.dataset.neededLetter==matchedLetter){
-                        //console.log("pos matches letters")
                         check++
                         console.log(el.dataset.neededLetter,matchedLetter)
                     }
@@ -375,7 +364,7 @@ function cullMatches(matches,word,checkWord,dir){
         }
         else{
             newMatches.push(matches[i+0],matches[i+1],matches[i+2],matches[i+3],matches[i+4],matches[i+5])
-            console.log("adding",checkWord,"because",check,'=',checkWord.length)
+            console.log("adding",checkWord)
         }
     }
     return newMatches
@@ -388,6 +377,4 @@ function regenCrossword(){
     pos=[]
     direction=[]
     genBoard(20,20)
-    
-
 }

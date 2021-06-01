@@ -13,9 +13,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
     <style>
+        body{
+            color:lightgray;
+        }
         td{
-            width:  5vh;
-            height: 5vh;
+            width:  4.2vh;
+            height: 4.2vh;
             padding:0;
             color:white;
         }
@@ -36,8 +39,8 @@
             background-color: black;
         }
         td>input{
-            width: 5vh;
-            height:5vh;
+            width: 4.2vh;
+            height:4.2vh;
             border:2px solid black;
             padding:0;
             background-color: darkgray;
@@ -74,9 +77,9 @@
             margin:auto;
             margin-top: 3vh;
             padding: 0;
+            max-width: 80vh;
             width: 20vw;
             height: max-content;
-            max-width: 2000px;
             color:lightgray;
             border: black solid 3px;
             font-size: 1.5vw;
@@ -105,11 +108,13 @@
         <center><h1>Kaip žaisti :</h1></center>
         <p>
             Paspauskite rodyklės klavišus į dešinę ar apačią, kad pasirinkti žodžio rašymo kryptį.<br><br>
-            Su 'Tab' ir 'Shift'+'Tab' klavišais eikite per žodžius.
+            Su 'Tab' ir 'Shift'+'Tab' klavišais eikite per žodžius.<br><br>
+            Rašant ar trinant žymeklis juda automatiškai.
         </p>
     </div>
     <center>
         <button tabindex="99" onclick="solveAll()">Išspręsti</button><button tabindex="100" onclick="resetCross()">Žaisti iš naujo</button><button onclick="regenCrossword()">Generuoti dar kartą</button>
+        <input type="checkbox" id="genOrNo" unchecked>Ar žodžiai atsitiktiniai
     </center>
     
     <script src="js/crossword.js"></script>
