@@ -349,7 +349,7 @@ function cullMatches(matches,word,checkWord,dir){
                     check++
                 }
                 else{
-                    if(el.dataset.neededLetter==matchedLetter){
+                    if(el.dataset.neededLetter.toLowerCase()==matchedLetter.toLowerCase()){
                         check++
                         console.log(el.dataset.neededLetter,matchedLetter)
                     }
