@@ -1,6 +1,6 @@
 function createMenuEl(){
-	var links=["imageGame.html","tables.html","form.html","snake.html","weather.html","galleryVue.html","crossword.html","crosswordExample.html"];
-	var names=["Nuotraukos žaidimas","Spalvotas table","Anketa","🐍Gyvatės žaidimas","Orai","Galerija (Vue)","Kryžiažodis","Kryžiažodis(ex)"];
+	var links=["imageGame.html","tables.html","form.html","snake.html","weather.html","galleryVue.html","crossword.html"];
+	var names=["Nuotraukos žaidimas","Spalvotas table","Anketa","🐍Gyvatės žaidimas","Orai","Galerija (Vue)","Kryžiažodis"];
     
 	var insert="";
 	for(i=0;i<links.length;i++){
