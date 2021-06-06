@@ -12,14 +12,8 @@ async function getWord(){
     ret[1]=data[0].definition
     return ret
 }
-//var words=["word","width","disc","reset","tangerine"];
-//var pos=["x0y0","x0y0","x0y2","x2y0","x2y4"];
-
-//var direction=["right","down","right","down","right"];
-var words=[],pos=[],direction=[]
-var descriptions=[];
+var words=[],pos=[],direction=[],descriptions=[]
 var selectDirection="";
-//var inWords=[],inDescription=[]
 var X,Y;
 async function genWords(){
     var output=[]
@@ -182,7 +176,7 @@ function resetCross(){
 }
 function focus(back){
     var x=X,y=Y
-    if(back==0){
+    if(!back){
         if(selectDirection=="right"){
             x++
             var id="inx"+x+"y"+y
@@ -200,7 +194,7 @@ function focus(back){
         }
         else if(selectDirection=="") alert("Pasirinkite kryptį")
     }
-    else if(back==1){
+    else if(back){
         if(selectDirection=="right"){
             x--
             var id="inx"+x+"y"+y
@@ -228,13 +222,16 @@ document.addEventListener('keyup', function(event) {
     if(event.code == "ArrowDown") {
         selectDirection = "down"
         document.getElementsByClassName("direction")[0].innerHTML=`<i class="fas fa-arrow-down"></i>`
+        return
     }
     else if(event.code == "ArrowRight") {
         selectDirection = "right"
         document.getElementsByClassName("direction")[0].innerHTML=`<i class="fas fa-arrow-right"></i>`
+        return
     }
     else if(event.key=="Backspace"){
         focus(1)
+        return
     }
     else {
         var alph="abcdefghijklmnopqrstuvwxyz"
@@ -246,11 +243,30 @@ document.addEventListener('keyup', function(event) {
         }
     }
 });
+function shuffle(arr1,arr2){
+    if(arr1.length==arr2.length)
+        for(let i=arr1.length-1;i>0;i--){
+            let rnd=Math.floor(Math.random()*i)
+            let temp1=arr1[i]
+                temp2=arr2[i]
+            arr1[i]=arr1[rnd]
+            arr2[i]=arr2[rnd]
+            arr1[rnd]=temp1
+            arr2[rnd]=temp2
+        }
+    else console.log("shuffle error")
+}
 async function genCrossword(){
     var inWords=[],inDescription=[]
     if(document.getElementById("genOrNo").checked==false){
-        inWords=["word","width","drive","reset","tangerine","desynchronize","sound","accent"]
-        inDescription=["A composition of letters","How wide something is","Storage media","Restore something to the initial state","Similar fruit to orange","stop being in sync (v)","what we hear","a different way that people speak"];
+        
+        inWords=["word","width","drive","reset","tangerine","desynchronize","sound","accent","shuffle","box"]
+        inDescription=["A composition of letters","How wide something is","Storage media","Restore something to the initial state","Similar fruit to orange","stop being in sync (v)","what we hear","a different way that people speak","sort in a random order","rectangular container"];
+        console.log(inWords,inDescription)
+        shuffle(inWords,inDescription)
+        inWords.splice(10,inWords.length)
+        inDescription.splice(10,inDescription.length)
+        console.log(inWords,inDescription)
     }
     else{
         var arr=await genWords()
@@ -274,13 +290,10 @@ async function genCrossword(){
             for(let j=0;j<words.length;j++){
                 let matches
                 let word=words[j],inWord=inWords[i],p=pos[j],dir=direction[j]
-                console.log(word,inWord,p,dir)
                 matches=matchPos(word,inWord,p,dir,i)
                 matches=cullMatches(matches,word,inWord,dir)
-                console.log(matches)
                 if(matches.length>0){
                     var rand=Math.floor(Math.random()*(matches.length/6))*6
-                    console.log(matches[rand+3],"added")
                     words[words.length]=matches[rand+3]
                     pos[pos.length]=matches[rand+0]
                     descriptions[descriptions.length]=inDescription[matches[5+rand]]
@@ -302,7 +315,7 @@ function matchPos(word,checkWord,wordPos,dir,index){
     var x=getX(wordPos),y=getY(wordPos)
     var matches=[]
     for(let i=0;i<word.length;i++){
-        for(j=0;j<checkWord.length;j++){
+        for(let j=0;j<checkWord.length;j++){
             if(checkWord[j]==word[i]){
                 matches.push(`x${x}y${y}`,checkWord[j],j,checkWord)   //FIX POS
                 
@@ -351,7 +364,6 @@ function cullMatches(matches,word,checkWord,dir){
                 else{
                     if(el.dataset.neededLetter.toLowerCase()==matchedLetter.toLowerCase()){
                         check++
-                        console.log(el.dataset.neededLetter,matchedLetter)
                     }
                     else break
                 }
@@ -364,7 +376,6 @@ function cullMatches(matches,word,checkWord,dir){
         }
         else{
             newMatches.push(matches[i+0],matches[i+1],matches[i+2],matches[i+3],matches[i+4],matches[i+5])
-            console.log("adding",checkWord)
         }
     }
     return newMatches
