@@ -259,14 +259,34 @@ function shuffle(arr1,arr2){
 async function genCrossword(){
     var inWords=[],inDescription=[]
     if(document.getElementById("genOrNo").checked==false){
-        
-        inWords=["word","width","drive","reset","tangerine","desynchronize","sound","accent","shuffle","box"]
-        inDescription=["A composition of letters","How wide something is","Storage media","Restore something to the initial state","Similar fruit to orange","stop being in sync (v)","what we hear","a different way that people speak","sort in a random order","rectangular container"];
-        console.log(inWords,inDescription)
+        inWords=["word",
+        "width",
+        "drive",
+        "reset",
+        "tangerine",
+        "desynchronize",
+        "sound",
+        "accent",
+        "shuffle",
+        "box"
+        ,"crossword",
+        "button"]
+        inDescription=["A composition of letters","How wide something is",
+        "Storage media",
+        "Restore something to the initial state",
+        "Similar fruit to orange",
+        "stop being in sync (v)",
+        "what we hear",
+        "a different way that people speak",
+        "sort in a random order",
+        "rectangular container",
+        "a game in which one is supposed to guess words based on clues and length",
+        "something that you can press"]
+        //console.log(inWords,inDescription)
         shuffle(inWords,inDescription)
-        inWords.splice(10,inWords.length)
-        inDescription.splice(10,inDescription.length)
-        console.log(inWords,inDescription)
+        inWords.splice(12,inWords.length)
+        inDescription.splice(12,inDescription.length)
+        //console.log(inWords,inDescription)
     }
     else{
         var arr=await genWords()
@@ -284,8 +304,8 @@ async function genCrossword(){
         inDescription.splice(0,1)
         addWords()
     }
-    let asd=4
-    while(asd>0){
+    let runs=2
+    while(runs>0){
         for(let i=0;i<inWords.length;i++){
             for(let j=0;j<words.length;j++){
                 let matches
@@ -305,7 +325,7 @@ async function genCrossword(){
             }
             addWords()
         }
-        asd--
+        runs--
     }
     genIndexes()
     genDesc()
@@ -387,5 +407,19 @@ function regenCrossword(){
     descriptions=[]
     pos=[]
     direction=[]
-    genBoard(20,20)
+    genBoard(23,20)
+    setElPositions()
 }
+function setElPositions(){
+    let desc=document.getElementById("description"),
+        board=document.getElementById("boardDiv"),
+        howTo=document.getElementById("howToPlay"),
+        arrow=document.getElementsByClassName("direction")[0],
+        position=board.getBoundingClientRect()
+    desc.style.width=`${position.left*0.98}px`
+    howTo.style.width=`${position.left*0.98}px`
+    arrow.style.left=`${position.right*1.0072}px`
+    arrow.style.top=`${position.bottom*0.73}px`
+}
+window.onresize=setElPositions
+window.addEventListener('fullscreenchange',setElPositions)

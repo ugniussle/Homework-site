@@ -13,12 +13,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 
     <style>
+        :root{
+            --cell-size:calc(2vh + 1.2vw);
+        }
         body{
             color:lightgray;
         }
         td{
-            width:  4.2vh;
-            height: 4.2vh;
+            width:  var(--cell-size);
+            height: var(--cell-size);
             padding:0;
             color:white;
         }
@@ -41,8 +44,8 @@
         td>input{
             position: absolute;
             margin-top:-2vh;
-            width: 4.2vh;
-            height:4.2vh;
+            width: var(--cell-size);
+            height:var(--cell-size);
             border:2px solid black;
             padding:0;
             background-color: darkgray;
@@ -52,10 +55,11 @@
         }
         .howToPlay{
             position: absolute;
-            width: 17vw;
-            top: 10vh;
+            top:47px;
+            margin-top: 3vh;
             height: 50vh;
             right: 0;
+            padding: 0.4vw;
             border: black solid 3px;
             background-color: rgba(0,0,0,0.4);
             color:lightgray;
@@ -67,9 +71,8 @@
             color:lightgray;
             position: absolute;
             width: 12vw;
-            top: 61vh;
             height: 13vw;
-            right:0;
+            padding: 0.2vw;
             font-size: 2vw;
         }
         #description{
@@ -79,9 +82,8 @@
             top:47px;
             margin:auto;
             margin-top: 3vh;
-            padding: 0;
+            padding: 0.4vw;
             max-width: 80vh;
-            width: 20vw;
             height: max-content;
             color:lightgray;
             border: black solid 3px;
@@ -102,12 +104,12 @@
     </style>
 </head>
 
-<body onpageshow="createNav();genBoard(23,20);">
+<body onpageshow="createNav();regenCrossword();setElPositions()">
 	<div class="navbar-my"></div>
     <div id="boardDiv"></div>
     <div id="description"></div>
     <div tabindex="2" class="direction">Spauskite rodyklę (dešinė arba apačia)</div>
-    <div class="howToPlay">
+    <div class="howToPlay" id="howToPlay">
         <center><h1>Kaip žaisti :</h1></center>
         <p>
             Paspauskite rodyklės klavišus į dešinę ar apačią, kad pasirinkti žodžio rašymo kryptį.<br><br>
