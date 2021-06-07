@@ -65,4 +65,4 @@ function markCurrent(){
         }
     }
 }
-createNav()
+window.addEventListener("load",createNav)
