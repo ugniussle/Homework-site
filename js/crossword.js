@@ -93,7 +93,7 @@ function genIndexes(){
             div.style.position="absolute"
             div.style.marginTop="-2.2vh"
             div.style.marginLeft="0.2vw"
-            div.style.fontSize="1.8vh"
+            div.style.fontSize="1.7vh"
             div.style.color="darkred"
             count++
         }
@@ -289,7 +289,7 @@ async function genCrossword(){
         //console.log(inWords,inDescription)
     }
     else{
-        var arr=await genWords()
+        let arr=await genWords()
         for(let i=0;i<arr.length;i++){
             inWords[i]=arr[i][0]
             inDescription[i]=arr[i][1]
@@ -313,7 +313,7 @@ async function genCrossword(){
                 matches=matchPos(word,inWord,p,dir,i)
                 matches=cullMatches(matches,word,inWord,dir)
                 if(matches.length>0){
-                    var rand=Math.floor(Math.random()*(matches.length/6))*6
+                    let rand=Math.floor(Math.random()*(matches.length/6))*6
                     words[words.length]=matches[rand+3]
                     pos[pos.length]=matches[rand+0]
                     descriptions[descriptions.length]=inDescription[matches[5+rand]]
@@ -411,7 +411,7 @@ function regenCrossword(){
     setElPositions()
 }
 function setElPositions(){
-    let desc=document.getElementById("description"),
+    var desc=document.getElementById("description"),
         board=document.getElementById("boardDiv"),
         howTo=document.getElementById("howToPlay"),
         arrow=document.getElementsByClassName("direction")[0],
@@ -419,7 +419,9 @@ function setElPositions(){
     desc.style.width=`${position.left*0.98}px`
     howTo.style.width=`${position.left*0.98}px`
     arrow.style.left=`${position.right*1.0072}px`
-    arrow.style.top=`${position.bottom*0.73}px`
+    arrow.style.top=`${position.bottom*0.71}px`
 }
 window.onresize=setElPositions
 window.addEventListener('fullscreenchange',setElPositions)
+window.onpageshow=regenCrossword
+setElPositions()
